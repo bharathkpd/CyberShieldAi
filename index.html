@@ -442,6 +442,9 @@
       .trust-strip-grid {
         grid-template-columns: 1fr !important;
       }
+      .live-dispatch-badge {
+        display: none !important;
+      }
     }
   </style>
 </head>
@@ -450,7 +453,7 @@
   <!-- Top Emergency Strip -->
   <div class="top-strip" style="background: #FAF4E6; border-bottom: 2px solid var(--line); padding: 8px 16px;">
     <div style="font-weight: 700; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-      <span style="background: var(--accent-red); color: white; font-family: 'IBM Plex Mono'; font-size: 10px; font-weight: 800; padding: 2px 6px; border: 1px solid var(--line); box-shadow: 2px 2px 0 var(--line); display: inline-flex; align-items: center; gap: 4px;">
+      <span class="live-dispatch-badge" style="background: var(--accent-red); color: white; font-family: 'IBM Plex Mono'; font-size: 10px; font-weight: 800; padding: 2px 6px; border: 1px solid var(--line); box-shadow: 2px 2px 0 var(--line); display: inline-flex; align-items: center; gap: 4px;">
         <span style="width: 6px; height: 6px; border-radius: 50%; background: white; display: inline-block;"></span>
         LIVE DISPATCH
       </span>
