@@ -91,6 +91,41 @@ const LOOKALIKE_PATTERNS = [
   { pattern: /kbc[-_]?(?:lottery|lucky|winner)/i, legit: "sonyliv.com" },
 ];
 
+const KNOWN_LEGITIMATE_DOMAINS = [
+  "google.com",
+  "google.co.in",
+  "youtube.com",
+  "wikipedia.org",
+  "amazon.in",
+  "amazon.com",
+  "flipkart.com",
+  "onlinesbi.sbi",
+  "sbi.co.in",
+  "hdfcbank.com",
+  "icicibank.com",
+  "axisbank.com",
+  "punjabnationalbank.in",
+  "bankofbaroda.in",
+  "canarabank.com",
+  "apspdcl.in",
+  "tssouthernpower.com",
+  "irctc.co.in",
+  "swiggy.com",
+  "zomato.com",
+  "uber.com",
+  "ola.in",
+  "paytm.com",
+  "phonepe.com",
+  "bhimupi.org.in",
+  "npci.org.in",
+  "uidai.gov.in",
+  "incometax.gov.in",
+  "cybercrime.gov.in",
+  "microsoft.com",
+  "apple.com",
+  "github.com",
+];
+
 export function analyzeUrlHeuristics(inputUrl: string): UrlHeuristicResult {
   let score = 0;
   const reasons: string[] = [];
@@ -126,6 +161,31 @@ export function analyzeUrlHeuristics(inputUrl: string): UrlHeuristicResult {
 
   const hostname = parsed.hostname.toLowerCase();
   const fullUrl = parsed.href.toLowerCase();
+
+  // Instant Whitelist Check for authentic government and verified corporate domains
+  const isGov = hostname.endsWith(".gov.in") || hostname.endsWith(".nic.in");
+  const isWhitelisted = isGov || KNOWN_LEGITIMATE_DOMAINS.some((d) => hostname === d || hostname.endsWith("." + d));
+
+  if (isWhitelisted && !inputUrl.includes("@")) {
+    return {
+      score: 2,
+      isSuspicious: false,
+      reasons: ["Verified authentic portal of an official government entity or verified corporate domain."],
+      details: {
+        hasBadTLD: false,
+        isIPAddress: false,
+        hasAtSymbol: false,
+        isShortener: false,
+        noHttps: parsed.protocol === "http:",
+        subdomainCount: hostname.split(".").length,
+        hasKeywords: false,
+        hasLookalike: false,
+        isPunycode: false,
+        highDigitRatio: false,
+        excessiveLength: false,
+      },
+    };
+  }
 
   // 1. Insecure HTTP (no HTTPS)
   const noHttps = parsed.protocol === "http:";

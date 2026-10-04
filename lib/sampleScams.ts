@@ -171,4 +171,25 @@ export const SAMPLE_SCAMS: SampleCase[] = [
     expectedVerdict: "SAFE",
     description: "Standard legitimate transaction confirmation with HTTPS and official state utility domain.",
   },
+  {
+    id: "normal-chat-sample",
+    title: "Normal Chat Message (Safe)",
+    type: "text",
+    category: "Everyday Friendly Chat",
+    previewSnippet: "Hi bro, are you free for lunch at 1 PM...",
+    content: "Hi bro, are you free for lunch today at 1 PM? Let's catch up at the food court. Let me know when you reach!",
+    expectedVerdict: "SAFE",
+    description: "Everyday innocent conversation between friends with zero financial coercion, panic, or links.",
+  },
+  {
+    id: "zomato-otp-sample",
+    title: "Legitimate Delivery OTP (Safe)",
+    type: "text",
+    category: "Authentic Service Alert",
+    previewSnippet: "Your OTP for Zomato order delivery is 4821...",
+    content: "Your OTP for Zomato order delivery is 4821. Valid for 10 minutes. Please do not share this code with anyone, including delivery partners.",
+    expectedVerdict: "SAFE",
+    description: "Authentic delivery OTP containing standard privacy hygiene instructions and zero suspicious URLs.",
+  },
 ];
+
