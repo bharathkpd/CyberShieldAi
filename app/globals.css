@@ -1,0 +1,240 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Design Tokens: Forensic Case File */
+  --paper: #F5F0E6;
+  --paper-2: #EDE6D6;
+  --card: #FFFDF8;
+  --ink: #1B1B1B;
+  --ink-soft: #55524B;
+  --line: #1B1B1B;
+  --divider: #D9D0BC;
+
+  /* Accent Alert Colors */
+  --accent-red: #D62828;
+  --accent-amber: #D98E04;
+  --accent-green: #2F7D4F;
+  --accent-olive: #5B6B4A;
+
+  /* Marker Highlight Overlays */
+  --marker-danger: rgba(214, 40, 40, 0.25);
+  --marker-suspicious: rgba(217, 142, 4, 0.30);
+  --marker-safe: rgba(47, 125, 79, 0.22);
+
+  /* Typography Fallbacks */
+  --font-fraunces: 'Fraunces', Georgia, serif;
+  --font-dm-sans: 'DM Sans', 'Noto Sans Telugu', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-ibm-plex-mono: 'IBM Plex Mono', 'Courier New', monospace;
+}
+
+/* Base resets & light-only enforcement */
+html {
+  background-color: #F5F0E6 !important;
+  color: #1B1B1B !important;
+  font-family: var(--font-dm-sans), 'DM Sans', 'Noto Sans Telugu', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color-scheme: light;
+}
+
+body {
+  background-color: #F5F0E6 !important;
+  color: #1B1B1B !important;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background paper grain overlay (Pure CSS 4% stipple effect) */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: radial-gradient(#1B1B1B 0.5px, transparent 0.5px);
+  background-size: 12px 12px;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Physical stamp gravity impact shake */
+@keyframes stamp-shake {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  15% { transform: translate(-6px, 3px) rotate(-1.5deg); }
+  30% { transform: translate(6px, -3px) rotate(1.5deg); }
+  45% { transform: translate(-4px, 2px) rotate(-1deg); }
+  60% { transform: translate(3px, -2px) rotate(0.8deg); }
+  75% { transform: translate(-2px, 1px) rotate(-0.4deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.shake-gravity {
+  animation: stamp-shake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* Ruled paper background effect for scanner and evidence files */
+.ruled-paper {
+  background-color: #FFFDF8 !important;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 27px,
+    #D9D0BC 28px
+  ) !important;
+  line-height: 28px !important;
+}
+
+/* Dotted divider */
+.dotted-divider {
+  background-image: radial-gradient(circle, #55524B 1px, transparent 1px);
+  background-size: 8px 2px;
+  background-repeat: repeat-x;
+  height: 2px;
+}
+
+/* Hard stamp border with slight ink-bleed simulation */
+.stamp-border {
+  border: 3px dashed currentColor;
+  box-shadow: inset 0 0 0 1px currentColor;
+}
+
+.stamp-box {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  font-family: var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 3px solid currentColor;
+  position: relative;
+}
+
+/* Masking tape corner decoration */
+.tape-top-left {
+  position: relative;
+}
+.tape-top-left::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  width: 55px;
+  height: 20px;
+  background-color: #E2D9C5;
+  border: 1px solid #C8BDA3;
+  opacity: 0.88;
+  transform: rotate(-3deg);
+  box-shadow: 0 1px 2px rgba(27,27,27,0.15);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.tape-top-right {
+  position: relative;
+}
+.tape-top-right::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  width: 55px;
+  height: 20px;
+  background-color: #E2D9C5;
+  border: 1px solid #C8BDA3;
+  opacity: 0.88;
+  transform: rotate(4deg);
+  box-shadow: 0 1px 2px rgba(27,27,27,0.15);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Hard Button styles with tactile mechanical press */
+.btn-case {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  font-weight: 600;
+  border: 2px solid #1B1B1B;
+  background-color: #FFFDF8;
+  color: #1B1B1B;
+  box-shadow: 4px 4px 0px #1B1B1B;
+  transition: transform 0.08s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.08s cubic-bezier(0.2, 0, 0, 1);
+  cursor: pointer;
+  border-radius: 3px;
+  min-height: 44px;
+  text-decoration: none;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.btn-case:hover {
+  transform: translate(-1.5px, -1.5px);
+  box-shadow: 5.5px 5.5px 0px #1B1B1B;
+}
+
+.btn-case:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0px #1B1B1B;
+}
+
+.btn-case-primary {
+  background-color: #D62828 !important;
+  color: #FFFFFF !important;
+  border-color: #1B1B1B !important;
+  box-shadow: 5px 5px 0px #1B1B1B !important;
+}
+
+.btn-case-primary:hover {
+  transform: translate(-1.5px, -1.5px) !important;
+  box-shadow: 6.5px 6.5px 0px #1B1B1B !important;
+  background-color: #BC1F1F !important;
+}
+
+.btn-case-primary:active {
+  transform: translate(4px, 4px) !important;
+  box-shadow: 1px 1px 0px #1B1B1B !important;
+}
+
+/* Case card styling */
+.case-card {
+  background-color: #FFFDF8 !important;
+  border: 2px solid #1B1B1B !important;
+  box-shadow: 6px 6px 0px #1B1B1B !important;
+  border-radius: 4px !important;
+}
+
+/* Redaction marker */
+.redacted {
+  background-color: #1B1B1B;
+  color: #1B1B1B;
+  user-select: none;
+  padding: 0 4px;
+  border-radius: 2px;
+}
+
+/* Custom scrollbars matching forensic paper tone */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #EDE6D6;
+  border-left: 1px solid #D9D0BC;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #55524B;
+  border: 1px solid #1B1B1B;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1B1B1B;
+}

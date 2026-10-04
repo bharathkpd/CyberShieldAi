@@ -1,0 +1,273 @@
+"use client";
+
+import React, { useState } from "react";
+import jsPDF from "jspdf";
+import {
+  X,
+  FileText,
+  Download,
+  Copy,
+  ExternalLink,
+  PhoneCall,
+  ShieldAlert,
+  CheckCircle2,
+} from "lucide-react";
+import { AnalysisResult } from "@/types";
+import { useToast } from "./Toast";
+
+interface ReportHelperProps {
+  isOpen: boolean;
+  onClose: () => void;
+  scanResult: AnalysisResult;
+}
+
+export const ReportHelper: React.FC<ReportHelperProps> = ({
+  isOpen,
+  onClose,
+  scanResult,
+}) => {
+  const { success, error } = useToast();
+
+  const [incidentDate, setIncidentDate] = useState(
+    scanResult.reportSummary?.incidentDate || new Date().toISOString().split("T")[0]
+  );
+  const [scamType, setScamType] = useState(
+    scanResult.reportSummary?.scamType || scanResult.category
+  );
+  const [senderInfo, setSenderInfo] = useState(
+    scanResult.reportSummary?.senderInfo || "Unknown / Header Intercept"
+  );
+  const [suspectContact, setSuspectContact] = useState(
+    scanResult.reportSummary?.suspectContactOrLink || ""
+  );
+  const [lossAmount, setLossAmount] = useState(
+    scanResult.reportSummary?.estimatedLossAmount || "0"
+  );
+  const [complainantCity, setComplainantCity] = useState("Hyderabad / Telangana");
+
+  if (!isOpen) return null;
+
+  const generateComplaintText = () => {
+    return `FORMAL CYBERCRIME COMPLAINT TO NATIONAL PORTAL (cybercrime.gov.in / 1930)
+========================================================================
+CASE IDENTIFIER: ${scanResult.id}
+INCIDENT DATE: ${incidentDate}
+INCIDENT CATEGORY: ${scamType}
+SUSPECT CONTACT / DOMAIN / UPI: ${suspectContact}
+SENDER IDENTIFIER: ${senderInfo}
+FINANCIAL LOSS ESTIMATE (INR): Rs. ${lossAmount || "0"}
+LOCATION / POLICE JURISDICTION: ${complainantCity}
+
+INCIDENT SUMMARY & FORENSIC FINDINGS:
+------------------------------------------------------------------------
+The complainant was targeted via an unsolicited transmission identified as: "${scanResult.scamFamily}".
+Forensic threat score assessed by CyberShield AI: ${scanResult.riskScore}/100 (${scanResult.verdict}).
+
+DETECTED FRAUD INDICATORS & RED FLAGS:
+${scanResult.redFlags.map((f, i) => `${i + 1}. [${f.severity.toUpperCase()}] "${f.phrase}": ${f.reason}`).join("\n")}
+
+EVIDENCE TRANSCRIPT:
+------------------------------------------------------------------------
+${scanResult.rawInput}
+
+REQUESTED POLICE ACTION:
+1. Block the suspect phone number, UPI VPA, and spoofed bank domain from Indian telecom and payment gateways.
+2. If financial debit occurred, coordinate with the nodal bank via 1930 Citizen Financial Cyber Fraud Reporting System to freeze fraudulent beneficiary accounts.
+3. Register official acknowledgment and file NCR / FIR as deemed appropriate.
+
+SUBMITTED THROUGH: CyberShield AI Forensic Defense Terminal
+OFFICIAL VERIFICATION: https://cybercrime.gov.in // HELPLINE: 1930
+========================================================================`;
+  };
+
+  const handleCopyComplaint = async () => {
+    try {
+      await navigator.clipboard.writeText(generateComplaintText());
+      success("Complaint Draft Copied", "Ready to paste directly into cybercrime.gov.in portal.");
+    } catch {
+      error("Copy Failed", "Please manually select and copy text.");
+    }
+  };
+
+  const handleExportPDF = () => {
+    try {
+      const doc = new jsPDF({
+        unit: "pt",
+        format: "a4",
+      });
+
+      doc.setFont("courier", "bold");
+      doc.setFontSize(16);
+      doc.setTextColor(27, 27, 27);
+      doc.text("NATIONAL CYBERCRIME COMPLAINT DOSSIER", 40, 50);
+
+      doc.setFontSize(10);
+      doc.setFont("courier", "normal");
+      doc.text(`REFERENCE ID: ${scanResult.id} | FILED DATE: ${incidentDate}`, 40, 70);
+      doc.line(40, 78, 550, 78);
+
+      doc.setFont("courier", "bold");
+      doc.text("1. INCIDENT CLASSIFICATION", 40, 100);
+      doc.setFont("courier", "normal");
+      doc.text(`Category: ${scamType}`, 50, 118);
+      doc.text(`Threat Level: ${scanResult.verdict} (${scanResult.riskScore}/100)`, 50, 134);
+      doc.text(`Suspect Point of Contact / Link: ${suspectContact || "None"}`, 50, 150);
+      doc.text(`Estimated Monetary Loss: INR Rs. ${lossAmount || "0"}`, 50, 166);
+
+      doc.setFont("courier", "bold");
+      doc.text("2. FORENSIC RED FLAGS DETECTED", 40, 195);
+      doc.setFont("courier", "normal");
+      let yOffset = 212;
+      scanResult.redFlags.slice(0, 4).forEach((flag, idx) => {
+        doc.text(`${idx + 1}. [${flag.severity.toUpperCase()}] ${flag.phrase.slice(0, 60)}`, 50, yOffset);
+        yOffset += 16;
+      });
+
+      doc.setFont("courier", "bold");
+      doc.text("3. EVIDENCE EXCERPT", 40, yOffset + 15);
+      doc.setFont("courier", "normal");
+      const splitEvidence = doc.splitTextToSize(scanResult.rawInput.slice(0, 600), 500);
+      doc.text(splitEvidence, 50, yOffset + 32);
+
+      const footY = yOffset + 32 + splitEvidence.length * 14 + 20;
+      doc.line(40, footY, 550, footY);
+      doc.setFontSize(9);
+      doc.text("Report generated by CyberShield AI. File online at https://cybercrime.gov.in or call 1930.", 40, footY + 16);
+
+      doc.save(`cybercrime-complaint-${scanResult.id}.pdf`);
+      success("PDF Dossier Generated", "Downloaded official incident complaint file.");
+    } catch (err) {
+      console.error(err);
+      error("PDF Error", "Could not generate PDF. Please use Copy Text.");
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-ink/50 backdrop-blur-none">
+      <div className="bg-paper border-2 border-line shadow-hard max-w-2xl w-full max-h-[92vh] overflow-y-auto p-4 sm:p-6 md:p-8 relative">
+        {/* Header */}
+        <div className="flex items-center justify-between border-b-2 border-line pb-4 mb-6">
+          <div>
+            <span className="font-mono text-12 font-bold uppercase text-accent-red">
+              STATUTORY COMPLAINT DRAFT // 1930 & I4C READY
+            </span>
+            <h3 className="font-serif text-24 font-bold text-ink">
+              Ready-to-File Cybercrime Incident Dossier
+            </h3>
+          </div>
+          <button
+            onClick={onClose}
+            className="p-1 border border-line bg-card hover:bg-paper-2 cursor-pointer"
+            aria-label="Close dialog"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Golden Hour Helpline Notice */}
+        <div className="bg-accent-red/10 border-2 border-accent-red p-4 mb-6 flex items-start gap-3">
+          <PhoneCall className="w-5 h-5 text-accent-red shrink-0 mt-0.5" />
+          <div className="font-sans text-13 text-ink">
+            <strong>Lost money in the last 2 hours?</strong> Immediately call <strong>1930</strong> (National Cyber Financial Helpline). Every minute counts to freeze the stolen funds before bank transfer.
+          </div>
+        </div>
+
+        {/* Form Inputs (Pre-filled, Editable) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 font-mono text-12">
+          <div>
+            <label className="font-bold block mb-1 text-ink-soft">INCIDENT DATE:</label>
+            <input
+              type="date"
+              value={incidentDate}
+              onChange={(e) => setIncidentDate(e.target.value)}
+              className="w-full p-2 border-2 border-line bg-card text-ink focus-visible:outline-none"
+            />
+          </div>
+          <div>
+            <label className="font-bold block mb-1 text-ink-soft">SCAM CATEGORY:</label>
+            <input
+              type="text"
+              value={scamType}
+              onChange={(e) => setScamType(e.target.value)}
+              className="w-full p-2 border-2 border-line bg-card text-ink focus-visible:outline-none"
+            />
+          </div>
+          <div>
+            <label className="font-bold block mb-1 text-ink-soft">SUSPECT CONTACT / LINK:</label>
+            <input
+              type="text"
+              value={suspectContact}
+              onChange={(e) => setSuspectContact(e.target.value)}
+              className="w-full p-2 border-2 border-line bg-card text-ink focus-visible:outline-none"
+            />
+          </div>
+          <div>
+            <label className="font-bold block mb-1 text-ink-soft">ESTIMATED LOSS (INR):</label>
+            <input
+              type="text"
+              value={lossAmount}
+              onChange={(e) => setLossAmount(e.target.value)}
+              placeholder="e.g. 1499 or 0"
+              className="w-full p-2 border-2 border-line bg-card text-ink focus-visible:outline-none"
+            />
+          </div>
+        </div>
+
+        {/* Formatted Complaint Box */}
+        <div className="border-2 border-line bg-card p-4 font-mono text-12 text-ink mb-6 max-h-56 overflow-y-auto whitespace-pre-wrap shadow-hard-sm">
+          {generateComplaintText()}
+        </div>
+
+        {/* How to File Step-by-Step */}
+        <div className="border-2 border-divider bg-paper-2 p-4 mb-6">
+          <span className="font-mono text-12 font-bold uppercase block mb-2 text-ink">
+            HOW TO FILE ON CYBERCRIME.GOV.IN IN 3 STEPS:
+          </span>
+          <ol className="text-12 font-sans space-y-1 pl-4 list-decimal text-ink-soft">
+            <li>Click <strong>"Report Crime"</strong> → Select "Financial Fraud" or "Other Cyber Crime".</li>
+            <li>Paste this formatted dossier text into the "Incident Details" text box.</li>
+            <li>Upload screenshots or payment receipts and submit with your mobile OTP verification.</li>
+          </ol>
+        </div>
+
+        {/* Action Controls */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row gap-2">
+            <button
+              onClick={handleCopyComplaint}
+              className="btn-case text-12 py-2 px-3 bg-card flex items-center justify-center gap-1.5 w-full sm:w-auto"
+            >
+              <Copy className="w-4 h-4" />
+              <span>Copy Formatted Complaint</span>
+            </button>
+            <button
+              onClick={handleExportPDF}
+              className="btn-case text-12 py-2 px-3 bg-card flex items-center justify-center gap-1.5 w-full sm:w-auto"
+            >
+              <Download className="w-4 h-4" />
+              <span>Export Official PDF</span>
+            </button>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-2">
+            <a
+              href="https://cybercrime.gov.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-case btn-case-primary text-12 py-2 px-4 flex items-center justify-center gap-1.5 w-full sm:w-auto"
+            >
+              <span>cybercrime.gov.in ↗</span>
+            </a>
+            <a
+              href="tel:1930"
+              className="btn-case text-12 py-2 px-3 bg-card text-accent-red font-bold flex items-center justify-center gap-1.5 w-full sm:w-auto"
+            >
+              <PhoneCall className="w-4 h-4" />
+              <span>Call 1930</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
