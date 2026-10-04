@@ -448,14 +448,23 @@
 <body>
 
   <!-- Top Emergency Strip -->
-  <div class="top-strip">
-    <div style="font-weight: 700; display: flex; align-items: center; gap: 6px;">
-      <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-red); display: inline-block;"></span>
-      <span>NATIONAL CYBER CRIME DESK // AP - TELANGANA - DELHI</span>
+  <div class="top-strip" style="background: #FAF4E6; border-bottom: 2px solid var(--line); padding: 8px 16px;">
+    <div style="font-weight: 700; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+      <span style="background: var(--accent-red); color: white; font-family: 'IBM Plex Mono'; font-size: 10px; font-weight: 800; padding: 2px 6px; border: 1px solid var(--line); box-shadow: 2px 2px 0 var(--line); display: inline-flex; align-items: center; gap: 4px;">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: white; display: inline-block;"></span>
+        LIVE DISPATCH
+      </span>
+      <span style="font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700; letter-spacing: 0.03em;">
+        NATIONAL CYBER CRIME DESK // AP STATE CYBER CELL • TELANGANA TSCSB • DELHI POLICE IFSO
+      </span>
+      <span style="font-family: 'IBM Plex Mono'; color: var(--ink-soft); font-weight: 500; font-size: 11px;">// MHA & I4C NODE</span>
     </div>
-    <a href="tel:1930" style="color: var(--accent-red); font-weight: 700; text-decoration: none;">
-      🚨 EMERGENCY HELPLINE: 1930
-    </a>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <span style="font-family: 'IBM Plex Mono'; font-size: 11px; color: var(--ink-soft); font-weight: 700;">24x7 FRAUD FREEZE:</span>
+      <a href="tel:1930" style="color: var(--accent-red); font-family: 'IBM Plex Mono'; font-weight: 800; font-size: 12px; text-decoration: none; background: var(--card); border: 2px solid var(--line); padding: 3px 8px; box-shadow: 2px 2px 0 var(--line);">
+        🚨 DIAL 1930 (TOLL-FREE)
+      </a>
+    </div>
   </div>
 
   <!-- Navbar -->
@@ -629,6 +638,18 @@
           <button class="sample-chip" onclick="loadSample('telugu')">
             <span style="width: 8px; height: 8px; background: var(--accent-red);"></span>
             Telugu Bank KYC (తెలుగు)
+          </button>
+          <button class="sample-chip" onclick="loadSample('link')">
+            <span style="width: 8px; height: 8px; background: var(--accent-red);"></span>
+            🔗 SBI Phishing URL (.top)
+          </button>
+          <button class="sample-chip" onclick="loadSample('screenshot')">
+            <span style="width: 8px; height: 8px; background: var(--accent-red);"></span>
+            📸 Digital Arrest Notice (CBI)
+          </button>
+          <button class="sample-chip" onclick="loadSample('qr')">
+            <span style="width: 8px; height: 8px; background: var(--accent-red);"></span>
+            🔳 Deceptive Refund QR (UPI)
           </button>
           <button class="sample-chip" onclick="loadSample('safe')">
             <span style="width: 8px; height: 8px; background: var(--accent-green);"></span>
@@ -825,6 +846,262 @@ DETECTED FRAUD INDICATORS:
     </div>
   </div>
 
+  <!-- How It Works: Numbered Evidence Tags -->
+  <section style="border-top: 2px solid var(--line); border-bottom: 2px solid var(--line); background: var(--paper-2); padding: 56px 0;">
+    <div class="container">
+      <div style="text-align: center; max-width: 680px; margin: 0 auto 40px auto;">
+        <span style="font-family: 'IBM Plex Mono'; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: var(--accent-red); text-transform: uppercase;">
+          INVESTIGATION PROCEDURE
+        </span>
+        <h2 class="font-serif" style="font-size: 32px; font-weight: 800; margin-top: 6px;">
+          How CyberShield Dissects Scams
+        </h2>
+        <p style="font-size: 15px; color: var(--ink-soft); margin-top: 8px;">
+          Three rigorous forensic stages designed to shield Indian citizens from financial fraud and credential theft.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+        <!-- Step 1 -->
+        <div class="case-card" style="padding: 24px; background: var(--card);">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--divider); padding-bottom: 10px; margin-bottom: 14px;">
+            <span class="stamp-box" style="border-color: var(--accent-red); color: var(--accent-red); font-size: 12px; padding: 2px 8px;">TAG 01</span>
+            <span style="font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700; color: var(--ink-soft);">INTAKE PHASE</span>
+          </div>
+          <h3 class="font-serif" style="font-size: 20px; font-weight: 800; margin-bottom: 8px;">Paste Suspicious Evidence</h3>
+          <p style="font-size: 14px; color: var(--ink-soft); line-height: 1.6;">
+            Submit any suspicious SMS, WhatsApp forward, bank warning, job contract, payment link, or upload screenshot/QR code.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="case-card" style="padding: 24px; background: var(--card);">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--divider); padding-bottom: 10px; margin-bottom: 14px;">
+            <span class="stamp-box" style="border-color: var(--accent-amber); color: var(--accent-amber); font-size: 12px; padding: 2px 8px;">TAG 02</span>
+            <span style="font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700; color: var(--ink-soft);">FORENSIC AUDIT</span>
+          </div>
+          <h3 class="font-serif" style="font-size: 20px; font-weight: 800; margin-bottom: 8px;">Dual-Engine Dissection</h3>
+          <p style="font-size: 14px; color: var(--ink-soft); line-height: 1.6;">
+            Our system evaluates psychological pressure tactics, brand typosquats (paypa1, sbi-kyc), bad TLDs, and cross-checks known Indian fraud families.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="case-card" style="padding: 24px; background: var(--card);">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--divider); padding-bottom: 10px; margin-bottom: 14px;">
+            <span class="stamp-box" style="border-color: var(--accent-green); color: var(--accent-green); font-size: 12px; padding: 2px 8px;">TAG 03</span>
+            <span style="font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700; color: var(--ink-soft);">DEFENSE SHIELD</span>
+          </div>
+          <h3 class="font-serif" style="font-size: 20px; font-weight: 800; margin-bottom: 8px;">1-Tap Action & Report</h3>
+          <p style="font-size: 14px; color: var(--ink-soft); line-height: 1.6;">
+            Get a risk verdict, generate a vernacular WhatsApp warning card for parents, and export a ready-to-file police complaint for 1930 and cybercrime.gov.in.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top 6 Modus Operandi in India Grid -->
+  <section style="padding: 56px 0; background: var(--paper);">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <span style="font-family: 'IBM Plex Mono'; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: var(--accent-red); text-transform: uppercase;">
+            INTELLIGENCE BULLETIN
+          </span>
+          <h2 class="font-serif" style="font-size: 32px; font-weight: 800; margin-top: 4px;">
+            Top 6 Modus Operandi in India
+          </h2>
+        </div>
+        <span style="font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700; color: var(--ink-soft);">
+          SOURCE: I4C & INDIAN CYBER POLICE DATA
+        </span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+        <div style="border: 2px solid var(--line); background: var(--card); padding: 20px; box-shadow: 3px 3px 0 var(--line);">
+          <div style="font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700; color: var(--accent-red);">01 // BANKING & PAN DEACTIVATION</div>
+          <h3 class="font-serif" style="font-size: 18px; font-weight: 800; margin: 4px 0 8px 0;">Fake KYC / Electricity Threats</h3>
+          <p style="font-size: 13px; color: var(--ink-soft); line-height: 1.5; margin-bottom: 10px;">
+            Threatens electricity disconnection at 9:30 PM or bank account freeze within hours unless an APK is installed.
+          </p>
+          <div style="border-top: 1px solid var(--divider); padding-top: 8px; font-family: 'IBM Plex Mono'; font-size: 11px; color: var(--accent-red); font-weight: 700;">
+            DEFENSE: Power boards NEVER send mobile numbers for bill clearance.
+          </div>
+        </div>
+
+        <div style="border: 2px solid var(--line); background: var(--card); padding: 20px; box-shadow: 3px 3px 0 var(--line);">
+          <div style="font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700; color: var(--accent-red);">02 // PART-TIME RECRUITMENT</div>
+          <h3 class="font-serif" style="font-size: 18px; font-weight: 800; margin: 4px 0 8px 0;">Work-From-Home Task Fraud</h3>
+          <p style="font-size: 13px; color: var(--ink-soft); line-height: 1.5; margin-bottom: 10px;">
+            Telegram/WhatsApp offers to review hotels or like YouTube videos for Rs 3,000/day, demanding a prepaid bond fee.
+          </p>
+          <div style="border-top: 1px solid var(--divider); padding-top: 8px; font-family: 'IBM Plex Mono'; font-size: 11px; color: var(--accent-red); font-weight: 700;">
+            DEFENSE: Any job requiring YOU to transfer money first is 100% fraud.
+          </div>
+        </div>
+
+        <div style="border: 2px solid var(--line); background: var(--card); padding: 20px; box-shadow: 3px 3px 0 var(--line);">
+          <div style="font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700; color: var(--accent-red);">03 // POSTAL CONSIGNMENT</div>
+          <h3 class="font-serif" style="font-size: 18px; font-weight: 800; margin: 4px 0 8px 0;">India Post Delivery Failed</h3>
+          <p style="font-size: 13px; color: var(--ink-soft); line-height: 1.5; margin-bottom: 10px;">
+            Fake SMS claiming a package is delayed, asking for a nominal Rs 5 redelivery fee to harvest card numbers and OTPs.
+          </p>
+          <div style="border-top: 1px solid var(--divider); padding-top: 8px; font-family: 'IBM Plex Mono'; font-size: 11px; color: var(--accent-red); font-weight: 700;">
+            DEFENSE: India Post only uses indiapost.gov.in. Never enter OTPs on .xyz links.
+          </div>
+        </div>
+
+        <div style="border: 2px solid var(--line); background: var(--card); padding: 20px; box-shadow: 3px 3px 0 var(--line);">
+          <div style="font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700; color: var(--accent-red);">04 // LOTTERY & KBC PRIZES</div>
+          <h3 class="font-serif" style="font-size: 18px; font-weight: 800; margin: 4px 0 8px 0;">Sim Card Lucky Draw</h3>
+          <p style="font-size: 13px; color: var(--ink-soft); line-height: 1.5; margin-bottom: 10px;">
+            Celebrity images and letters claiming 25 Lakh winnings, demanding "GST tax" or "customs duty" payments.
+          </p>
+          <div style="border-top: 1px solid var(--divider); padding-top: 8px; font-family: 'IBM Plex Mono'; font-size: 11px; color: var(--accent-red); font-weight: 700;">
+            DEFENSE: You cannot win a lottery you never bought a ticket for.
+          </div>
+        </div>
+
+        <div style="border: 2px solid var(--line); background: var(--card); padding: 20px; box-shadow: 3px 3px 0 var(--line);">
+          <div style="font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700; color: var(--accent-red);">05 // DIGITAL ARREST</div>
+          <h3 class="font-serif" style="font-size: 18px; font-weight: 800; margin: 4px 0 8px 0;">Police & Customs Video Threat</h3>
+          <p style="font-size: 13px; color: var(--ink-soft); line-height: 1.5; margin-bottom: 10px;">
+            Callers posing as CBI or Mumbai Police claiming drugs or illegal passports found in your parcel, staging fake video courtrooms.
+          </p>
+          <div style="border-top: 1px solid var(--divider); padding-top: 8px; font-family: 'IBM Plex Mono'; font-size: 11px; color: var(--accent-red); font-weight: 700;">
+            DEFENSE: There is NO legal provision for "digital arrest" via Skype/WhatsApp in India.
+          </div>
+        </div>
+
+        <div style="border: 2px solid var(--line); background: var(--card); padding: 20px; box-shadow: 3px 3px 0 var(--line);">
+          <div style="font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700; color: var(--accent-green);">06 // STATE HELPLINE RAPID RESPONSE</div>
+          <h3 class="font-serif" style="font-size: 18px; font-weight: 800; margin: 4px 0 8px 0;">The Golden Hour Rule (1930)</h3>
+          <p style="font-size: 13px; color: var(--ink-soft); line-height: 1.5; margin-bottom: 10px;">
+            If funds are debited from your bank or UPI, reporting within 2 hours allows 1930 to freeze the mule accounts in real time.
+          </p>
+          <div style="border-top: 1px solid var(--divider); padding-top: 8px; font-family: 'IBM Plex Mono'; font-size: 11px; color: var(--accent-green); font-weight: 700;">
+            ACTION: Keep transaction IDs, beneficiary UPI IDs, and call 1930 immediately.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Complete Forensic Case File Ending Footer -->
+  <footer style="border-top: 2px solid var(--line); background: var(--paper-2); padding: 56px 0 40px 0;">
+    <div class="container">
+      
+      <!-- Top Rapid Emergency Response Strip -->
+      <div class="case-card" style="padding: 24px; background: var(--card); margin-bottom: 48px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <div style="font-family: 'IBM Plex Mono'; font-size: 12px; font-weight: 800; color: var(--accent-red); display: flex; align-items: center; gap: 6px; text-transform: uppercase;">
+              <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-red); display: inline-block;"></span>
+              GOLDEN HOUR EMERGENCY FINANCIAL FREEZE (WITHIN 2 HOURS)
+            </div>
+            <h3 class="font-serif" style="font-size: 20px; font-weight: 800; margin: 4px 0 4px 0;">
+              Victim of an unauthorized bank transfer or UPI payment? Act immediately.
+            </h3>
+            <p style="font-size: 13px; color: var(--ink-soft); max-width: 720px;">
+              Dialing <strong>1930</strong> connects directly to the National Cyber Crime Reporting Portal (NCRP) and citizen financial fraud management system (CFCFRMS), halting fund dispersal through mule bank accounts.
+            </p>
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="tel:1930" class="btn-case btn-case-primary" style="font-size: 14px;">
+              🚨 CALL HELPLINE 1930
+            </a>
+            <a href="https://cybercrime.gov.in" target="_blank" class="btn-case" style="font-size: 14px;">
+              cybercrime.gov.in ↗
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4-Column Directory Grid -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; padding-bottom: 40px; border-bottom: 2px solid var(--divider);">
+        
+        <!-- Col 1: Brand & Standard -->
+        <div>
+          <div style="display: flex; align-items: center; gap: 4px; margin-bottom: 12px;">
+            <span class="font-serif" style="font-size: 26px; font-weight: 800;">CyberShield</span>
+            <span class="logo-dot"></span>
+            <span style="font-family: 'IBM Plex Mono'; font-size: 10px; font-weight: 700; border: 1px solid var(--line); padding: 1px 4px; margin-left: 6px; background: var(--card);">
+              #CS-2026.4
+            </span>
+          </div>
+          <p style="font-size: 13px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 14px;">
+            Automated cybercrime detection and forensic decision-support desk engineered specifically for citizens across India. Dissects deceptive psychology, malicious domain infrastructure, and fraudulent payment lures in real time.
+          </p>
+          <div style="font-family: 'IBM Plex Mono'; font-size: 11px; color: var(--ink-soft);">
+            <span class="stamp-box" style="border-color: var(--accent-green); color: var(--accent-green); font-size: 10px; padding: 2px 6px;">LIGHT THEME ONLY</span>
+            <div style="margin-top: 6px;">Zero server-side retention: Ephemeral client analysis</div>
+          </div>
+        </div>
+
+        <!-- Col 2: Investigation Modules -->
+        <div>
+          <div style="font-family: 'IBM Plex Mono'; font-size: 12px; font-weight: 800; border-bottom: 2px solid var(--line); padding-bottom: 6px; margin-bottom: 12px;">
+            FORENSIC MODULES
+          </div>
+          <ul style="list-style: none; font-family: 'IBM Plex Mono'; font-size: 12px; line-height: 2;">
+            <li><a href="#intake" onclick="loadSample('kyc')" style="color: var(--ink-soft); text-decoration: none;">→ Suspicious SMS Scanner</a></li>
+            <li><a href="#intake" onclick="loadSample('link')" style="color: var(--ink-soft); text-decoration: none;">→ Link Typosquat & TLD Auditor</a></li>
+            <li><a href="#intake" onclick="loadSample('screenshot')" style="color: var(--ink-soft); text-decoration: none;">→ Screenshot Evidence Inspector</a></li>
+            <li><a href="#intake" onclick="loadSample('qr')" style="color: var(--ink-soft); text-decoration: none;">→ Deceptive UPI QR Decoder</a></li>
+            <li><a href="#intake" onclick="openComplaintModal()" style="color: var(--ink-soft); text-decoration: none;">→ 1930 Complaint Dossier Generator</a></li>
+            <li><a href="#intake" onclick="openFamilyModal()" style="color: var(--ink-soft); text-decoration: none;">→ Family Protect Warning Card</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: State Cyber Crime Desks -->
+        <div>
+          <div style="font-family: 'IBM Plex Mono'; font-size: 12px; font-weight: 800; border-bottom: 2px solid var(--line); padding-bottom: 6px; margin-bottom: 12px;">
+            STATE CYBER DESKS
+          </div>
+          <ul style="list-style: none; font-family: 'IBM Plex Mono'; font-size: 12px; line-height: 2;">
+            <li><a href="https://cid.appolice.gov.in" target="_blank" style="color: var(--ink-soft); text-decoration: none;">AP State Cyber Security Bureau ↗</a></li>
+            <li><a href="https://tscsb.telangana.gov.in" target="_blank" style="color: var(--ink-soft); text-decoration: none;">Telangana Cyber Security Bureau ↗</a></li>
+            <li><a href="https://delhipolice.gov.in" target="_blank" style="color: var(--ink-soft); text-decoration: none;">Delhi Police IFSO Special Cell ↗</a></li>
+            <li><a href="https://cybercrime.gov.in" target="_blank" style="color: var(--ink-soft); text-decoration: none;">National Cyber Portal (I4C) ↗</a></li>
+            <li><a href="https://sancharsaathi.gov.in" target="_blank" style="color: var(--ink-soft); text-decoration: none;">Chakshu Telecom Fraud (DoT) ↗</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Emergency Contacts -->
+        <div>
+          <div style="font-family: 'IBM Plex Mono'; font-size: 12px; font-weight: 800; border-bottom: 2px solid var(--line); padding-bottom: 6px; margin-bottom: 12px;">
+            EMERGENCY DIAL
+          </div>
+          <div style="font-family: 'IBM Plex Mono'; font-size: 12px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="padding: 8px; border: 1px solid var(--line); background: var(--card);">
+              <div style="font-size: 10px; color: var(--ink-soft); font-weight: 700;">FINANCIAL CYBER FRAUD:</div>
+              <a href="tel:1930" style="color: var(--accent-red); font-size: 15px; font-weight: 800; text-decoration: none;">1930 (Toll-Free 24x7)</a>
+            </div>
+            <div style="padding: 8px; border: 1px solid var(--line); background: var(--card);">
+              <div style="font-size: 10px; color: var(--ink-soft); font-weight: 700;">NATIONAL POLICE:</div>
+              <a href="tel:112" style="color: var(--ink); font-size: 14px; font-weight: 800; text-decoration: none;">112</a>
+            </div>
+            <div style="padding: 8px; border: 1px solid var(--line); background: var(--card);">
+              <div style="font-size: 10px; color: var(--ink-soft); font-weight: 700;">WOMEN HELPLINE:</div>
+              <a href="tel:1091" style="color: var(--ink); font-size: 14px; font-weight: 800; text-decoration: none;">1091 / 181</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Disclaimer -->
+      <div style="padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-family: 'IBM Plex Mono'; font-size: 11px; color: var(--ink-soft);">
+        <p style="max-w: 680px; margin: 0; line-height: 1.5;">
+          <strong>STATUTORY DISCLAIMER:</strong> CyberShield AI operates as an automated forensic decision-support aid. Never transfer money, share OTPs, enter your UPI PIN to receive funds, or grant remote desktop access. In financial loss events, call 1930 immediately to lodge an acknowledgment on NCRP.
+        </p>
+        <div style="font-weight: 700; color: var(--ink);">
+          REGION: INDIA (EN | TE | HI) // LIGHT THEME FORENSIC FILE
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <!-- Interactive JavaScript Engine -->
   <script>
     const SAMPLES = {
@@ -924,6 +1201,51 @@ DETECTED FRAUD INDICATORS:
         actions: [
           "No defensive action required. Retain receipt for your records."
         ]
+      },
+      link: {
+        text: "http://sbi-pan-kyc.top/update",
+        verdict: "DANGEROUS",
+        score: 96,
+        family: "Banking Phishing & Typosquat Domain",
+        explanation: "High-risk domain identified. Uses suspicious .top TLD, impersonates State Bank of India without HTTPS security, and harvests banking passwords and OTPs.",
+        flags: [
+          { phrase: "sbi-pan-kyc.top", severity: "danger", reason: "Deceptive typosquat brand domain on high-risk .top TLD" },
+          { phrase: "http://", severity: "danger", reason: "Insecure unencrypted HTTP connection" }
+        ],
+        actions: [
+          "Never enter your netbanking credentials or OTPs on non-sbi.co.in domains.",
+          "Check official portal URL: always verify on state bank official site."
+        ]
+      },
+      screenshot: {
+        text: "WHATSAPP / SKYPE FORENSIC INTERCEPT // SENDER: +91-8800991122\n[CBI & DELHI CYBER CELL DIGITAL ARREST NOTICE]\nCounterfeit passport seized at Delhi Airport. Digital Arrest Warrant #CBI-NDPS-88412 issued. Demands Rs 2,50,000 security bond to cbi-verification@sbi to prevent police dispatch.",
+        verdict: "DANGEROUS",
+        score: 99,
+        family: "Digital Arrest Cyber Extortion Scheme",
+        explanation: "CRITICAL POLICE EXTORTION DETECTED: Indian law enforcement NEVER places individuals under 'Digital Arrest' via WhatsApp/Skype video calls or demands security deposits to clear warrants.",
+        flags: [
+          { phrase: "DIGITAL ARREST", severity: "danger", reason: "No legal provision for Digital Arrest under CrPC/BNS" },
+          { phrase: "cbi-verification@sbi", severity: "danger", reason: "Fraudulent extortion payment handle" }
+        ],
+        actions: [
+          "Immediately disconnect the video call. Do not transfer any money.",
+          "Call 1930 and inform local police station immediately."
+        ]
+      },
+      qr: {
+        text: "DECEPTIVE UPI QR CODE // upi://pay?pa=refund-agent99@oksbi&pn=SBI_Customer_Refund&am=5000&cu=INR&tn=ENTER_UPI_PIN_FOR_REFUND",
+        verdict: "DANGEROUS",
+        score: 98,
+        family: "Reverse Payment QR Scam (UPI Collect Trap)",
+        explanation: "REVERSE UPI TRAP: This QR code is encoded to DEBIT Rs 5,000 from your bank account. Scammers falsely claim you need to scan and enter your MPIN to 'receive a refund'.",
+        flags: [
+          { phrase: "ENTER_UPI_PIN_FOR_REFUND", severity: "danger", reason: "CRITICAL: You NEVER enter your UPI PIN to receive money. MPIN only debits funds." },
+          { phrase: "am=5000", severity: "danger", reason: "Automated debit amount of Rs 5,000" }
+        ],
+        actions: [
+          "DO NOT scan or approve this QR in Google Pay, PhonePe, or Paytm.",
+          "Remember: Receiving money NEVER requires entering your UPI PIN."
+        ]
       }
     };
 
@@ -942,11 +1264,14 @@ DETECTED FRAUD INDICATORS:
       el.classList.add('active');
       const textarea = document.getElementById('scanner-input');
       if (type === 'link') {
-        textarea.placeholder = "Enter suspicious URL (e.g. http://sbi-kyc-reward.top/update or shortener bit.ly/pan-update)...";
+        textarea.value = "http://sbi-pan-kyc.top/update";
+        loadSample('link');
       } else if (type === 'screenshot') {
-        textarea.placeholder = "Upload or drag-and-drop screenshot evidence... (Analyzing OCR text)";
+        textarea.value = "WHATSAPP / SKYPE FORENSIC INTERCEPT // SENDER: +91-8800991122\n[CBI & DELHI CYBER CELL DIGITAL ARREST NOTICE]\nCounterfeit passport seized at Delhi Airport. Digital Arrest Warrant #CBI-NDPS-88412 issued. Demands Rs 2,50,000 security bond to cbi-verification@sbi to prevent police dispatch.";
+        loadSample('screenshot');
       } else if (type === 'qr') {
-        textarea.placeholder = "Upload QR code to decode UPI VPA string (e.g. upi://pay?pa=...)...";
+        textarea.value = "DECEPTIVE UPI QR CODE // upi://pay?pa=refund-agent99@oksbi&pn=SBI_Customer_Refund&am=5000&cu=INR&tn=ENTER_UPI_PIN_FOR_REFUND";
+        loadSample('qr');
       } else {
         textarea.placeholder = "Paste the exact suspicious SMS, WhatsApp message, email excerpt, or recruiter message here...";
       }
