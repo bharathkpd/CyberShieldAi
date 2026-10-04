@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberShield AI | Fraud Investigation & Scam Defense Desk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Fraunces:opsz,wght@9..144,600..800&family=IBM+Plex+Mono:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* FORENSIC CASE FILE DESIGN SYSTEM - LIGHT ONLY */
+    :root {
+      --paper: #F5F0E6;
+      --paper-2: #EDE6D6;
+      --card: #FFFDF8;
+      --ink: #1B1B1B;
+      --ink-soft: #55524B;
+      --line: #1B1B1B;
+      --divider: #D9D0BC;
+      --accent-red: #D62828;
+      --accent-amber: #D98E04;
+      --accent-green: #2F7D4F;
+      --accent-olive: #5B6B4A;
+      --marker-danger: rgba(214, 40, 40, 0.25);
+      --marker-suspicious: rgba(217, 142, 4, 0.30);
+      --marker-safe: rgba(47, 125, 79, 0.22);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      background-color: var(--paper) !important;
+      color: var(--ink) !important;
+      font-family: 'DM Sans', 'Noto Sans Telugu', 'Noto Sans Devanagari', -apple-system, sans-serif;
+      color-scheme: light;
+      line-height: 1.5;
+    }
+
+    body {
+      background-color: var(--paper) !important;
+      color: var(--ink) !important;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Stipple paper texture */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background-image: radial-gradient(var(--ink) 0.5px, transparent 0.5px);
+      background-size: 12px 12px;
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .font-serif { font-family: 'Fraunces', Georgia, serif; }
+    .font-mono { font-family: 'IBM Plex Mono', 'Courier New', monospace; }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* Tactical Cards and Buttons */
+    .case-card {
+      background: var(--card);
+      border: 2px solid var(--line);
+      box-shadow: 6px 6px 0px var(--line);
+      border-radius: 4px;
+    }
+
+    .btn-case {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      border: 2px solid var(--line);
+      background-color: var(--card);
+      color: var(--ink);
+      box-shadow: 4px 4px 0px var(--line);
+      transition: transform 0.08s cubic-bezier(0.2,0,0,1), box-shadow 0.08s cubic-bezier(0.2,0,0,1);
+      cursor: pointer;
+      border-radius: 3px;
+      min-height: 44px;
+      text-decoration: none;
+      touch-action: manipulation;
+    }
+    .btn-case:hover {
+      transform: translate(-1.5px, -1.5px);
+      box-shadow: 5.5px 5.5px 0px var(--line);
+    }
+    .btn-case:active {
+      transform: translate(3px, 3px);
+      box-shadow: 1px 1px 0px var(--line);
+    }
+
+    .btn-case-primary {
+      background-color: var(--accent-red) !important;
+      color: #FFFFFF !important;
+      box-shadow: 5px 5px 0px var(--line) !important;
+    }
+    .btn-case-primary:hover {
+      background-color: #BC1F1F !important;
+      box-shadow: 6.5px 6.5px 0px var(--line) !important;
+    }
+    .btn-case-primary:active {
+      transform: translate(4px, 4px) !important;
+      box-shadow: 1px 1px 0px var(--line) !important;
+    }
+
+    /* Ruled paper background */
+    .ruled-paper {
+      background-color: var(--card);
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 27px,
+        var(--divider) 28px
+      );
+      line-height: 28px;
+    }
+
+    /* Tape corners */
+    .tape-top-left { position: relative; }
+    .tape-top-left::before {
+      content: "";
+      position: absolute;
+      top: -10px; left: 16px;
+      width: 50px; height: 18px;
+      background: #E2D9C5;
+      border: 1px solid #C8BDA3;
+      transform: rotate(-3deg);
+      opacity: 0.9;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .tape-top-right { position: relative; }
+    .tape-top-right::after {
+      content: "";
+      position: absolute;
+      top: -10px; right: 16px;
+      width: 50px; height: 18px;
+      background: #E2D9C5;
+      border: 1px solid #C8BDA3;
+      transform: rotate(4deg);
+      opacity: 0.9;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Rubber stamp gravity impact */
+    @keyframes stamp-shake {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      15% { transform: translate(-6px, 3px) rotate(-1.5deg); }
+      30% { transform: translate(6px, -3px) rotate(1.5deg); }
+      45% { transform: translate(-4px, 2px) rotate(-1deg); }
+      60% { transform: translate(3px, -2px) rotate(0.8deg); }
+      75% { transform: translate(-2px, 1px) rotate(-0.4deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+    .shake-gravity {
+      animation: stamp-shake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+
+    .stamp-box {
+      display: inline-block;
+      padding: 8px 16px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 3px solid currentColor;
+      box-shadow: 4px 4px 0px currentColor;
+    }
+
+    /* Evidence Markers */
+    mark.evidence-danger {
+      background: var(--marker-danger);
+      border-bottom: 2px solid var(--accent-red);
+      font-weight: 700;
+      color: var(--ink);
+      padding: 1px 4px;
+      cursor: pointer;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+    mark.evidence-suspicious {
+      background: var(--marker-suspicious);
+      border-bottom: 2px solid var(--accent-amber);
+      font-weight: 700;
+      color: var(--ink);
+      padding: 1px 4px;
+      cursor: pointer;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+    mark.evidence-safe {
+      background: var(--marker-safe);
+      border-bottom: 2px solid var(--accent-green);
+      font-weight: 700;
+      color: var(--ink);
+      padding: 1px 4px;
+      cursor: pointer;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
+    /* Navigation header */
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--paper);
+      border-bottom: 2px solid var(--line);
+      z-index: 50;
+    }
+    .top-strip {
+      background: var(--paper-2);
+      border-bottom: 1px solid var(--divider);
+      padding: 4px 16px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .logo-text {
+      font-family: 'Fraunces', serif;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .logo-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--accent-red);
+      display: inline-block;
+      margin-left: 2px;
+    }
+
+    /* Tabs */
+    .tab-btn {
+      flex: 1;
+      padding: 12px 8px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      border: none;
+      background: transparent;
+      color: var(--ink-soft);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.15s;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .tab-btn.active {
+      color: var(--accent-red);
+      border-bottom-color: var(--accent-red);
+    }
+
+    /* Scanner ruled textarea */
+    .scanner-textarea {
+      width: 100%;
+      min-height: 160px;
+      padding: 16px;
+      border: 2px solid var(--line);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      color: var(--ink);
+      resize: vertical;
+      outline: none;
+    }
+    .scanner-textarea:focus {
+      border-color: var(--accent-red);
+    }
+
+    /* Laser scanning animation */
+    .laser-line {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent-red);
+      box-shadow: 0 0 10px rgba(214, 40, 40, 0.6);
+      animation: laser-sweep 1.4s ease-in-out infinite alternate;
+    }
+    @keyframes laser-sweep {
+      0% { top: 0%; }
+      100% { top: 96%; }
+    }
+
+    /* Modals */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(27,27,27,0.55);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    /* Responsive Grid */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+      align-items: center;
+      padding: 48px 0;
+    }
+    @media (min-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 7fr 5fr;
+      }
+    }
+
+    .samples-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .sample-chip {
+      background: var(--paper-2);
+      border: 2px solid var(--line);
+      padding: 6px 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 2px 2px 0px var(--line);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.1s;
+    }
+    .sample-chip:hover {
+      background: var(--card);
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0px var(--line);
+    }
+    .sample-chip:active {
+      transform: translate(2px, 2px);
+      box-shadow: 0 0 0;
+    }
+
+    /* Progress bar */
+    .gauge-track {
+      height: 18px;
+      background: var(--paper-2);
+      border: 2px solid var(--line);
+      position: relative;
+      overflow: hidden;
+    }
+    .gauge-fill {
+      height: 100%;
+      background: var(--accent-red);
+      width: 0%;
+      transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Emergency Strip -->
+  <div class="top-strip">
+    <div style="font-weight: 700; display: flex; align-items: center; gap: 6px;">
+      <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-red); display: inline-block;"></span>
+      <span>NATIONAL CYBER CRIME DESK // AP - TELANGANA - DELHI</span>
+    </div>
+    <a href="tel:1930" style="color: var(--accent-red); font-weight: 700; text-decoration: none;">
+      🚨 EMERGENCY HELPLINE: 1930
+    </a>
+  </div>
+
+  <!-- Navbar -->
+  <header>
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-text">CyberShield</span>
+        <span class="logo-dot"></span>
+        <span style="font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700; border: 1px solid var(--line); padding: 2px 6px; margin-left: 8px; background: var(--card);">
+          AI DESK
+        </span>
+      </a>
+
+      <!-- Language selector segmented -->
+      <div style="display: flex; border: 2px solid var(--line); background: var(--paper-2); box-shadow: 2px 2px 0px var(--line);">
+        <button id="lang-en" onclick="setLang('en')" style="padding: 4px 10px; font-family: 'IBM Plex Mono'; font-size: 12px; font-weight: 700; border: none; background: var(--card); color: var(--ink); cursor: pointer; border-right: 1px solid var(--line);">EN</button>
+        <button id="lang-te" onclick="setLang('te')" style="padding: 4px 10px; font-family: 'IBM Plex Mono'; font-size: 12px; font-weight: 700; border: none; background: transparent; color: var(--ink-soft); cursor: pointer; border-right: 1px solid var(--line);">తెలుగు</button>
+        <button id="lang-hi" onclick="setLang('hi')" style="padding: 4px 10px; font-family: 'IBM Plex Mono'; font-size: 12px; font-weight: 700; border: none; background: transparent; color: var(--ink-soft); cursor: pointer;">हिन्दी</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="container" style="padding-top: 36px; padding-bottom: 48px; border-bottom: 2px solid var(--line);">
+    <div class="hero-grid">
+      <!-- Left Hero Column -->
+      <div>
+        <div style="display: inline-flex; align-items: center; gap: 8px; padding: 4px 10px; border: 2px solid var(--line); background: var(--card); box-shadow: 3px 3px 0px var(--line); margin-bottom: 20px;">
+          <span style="width: 8px; height: 8px; background: var(--accent-red);"></span>
+          <span style="font-family: 'IBM Plex Mono'; font-size: 12px; font-weight: 700; text-transform: uppercase;">
+            FRAUD INVESTIGATION DESK
+          </span>
+        </div>
+
+        <h1 class="font-serif" style="font-size: clamp(34px, 5vw, 62px); font-weight: 800; line-height: 1.08; letter-spacing: -0.5px; margin-bottom: 18px;">
+          Got a weird message?<br>Let's investigate.
+        </h1>
+
+        <p style="font-size: clamp(16px, 2vw, 19px); color: var(--ink-soft); max-width: 580px; margin-bottom: 28px; line-height: 1.55;">
+          Paste suspicious SMS, WhatsApp offers, delivery links, or UPI payment requests. Get instant forensic verdict, exact highlighted red flags, and 1-tap warning cards for your parents.
+        </p>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-bottom: 28px;">
+          <a href="#intake" class="btn-case btn-case-primary" style="font-size: 16px; padding: 12px 24px;">
+            Start Investigation ↘
+          </a>
+          <button onclick="loadSample('job')" class="btn-case" style="font-size: 14px;">
+            Try a Sample Scam →
+          </button>
+        </div>
+
+        <div style="font-family: 'IBM Plex Mono'; font-size: 12px; color: var(--ink-soft); display: flex; align-items: center; gap: 8px;">
+          <span style="padding: 2px 6px; border: 2px solid var(--accent-green); color: var(--accent-green); font-weight: 700;">100% PRIVATE</span>
+          <span>Zero server storage. Client-first forensic parsing.</span>
+        </div>
+      </div>
+
+      <!-- Right Column: Tilted Hero Evidence Card -->
+      <div style="display: flex; justify-content: center;">
+        <div class="case-card tape-top-left tape-top-right" style="padding: 24px; max-width: 440px; width: 100%; transform: rotate(-2deg); background: var(--card); position: relative;">
+          <div style="display: flex; justify-content: space-between; border-bottom: 2px solid var(--line); padding-bottom: 8px; margin-bottom: 14px; font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700;">
+            <span style="background: var(--accent-red); color: white; padding: 2px 6px;">CASE #CS-2041</span>
+            <span style="color: var(--ink-soft);">EXHIBIT A // SMS INTERCEPT</span>
+          </div>
+
+          <div class="ruled-paper" style="border: 2px solid var(--divider); padding: 14px; font-family: 'IBM Plex Mono'; font-size: 13px; line-height: 28px; margin-bottom: 16px;">
+            <div style="font-size: 11px; color: var(--ink-soft); font-weight: 700; margin-bottom: 4px;">SENDER: "VK-SBIBNK"</div>
+            URGENT: Dear customer, your SBI account will be
+            <mark class="evidence-danger">BLOCKED within 12 hours</mark>
+            due to pending KYC. Update PAN card at
+            <mark class="evidence-danger">http://sbi-pan-kyc.top/update</mark>
+            or call manager at
+            <mark class="evidence-danger">+91-9876543210</mark>.
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-family: 'IBM Plex Mono'; font-size: 11px; color: var(--ink-soft); font-weight: 700;">
+              STATUS: FORENSIC MATCH
+            </span>
+            <div id="hero-stamp" class="stamp-box" style="border-color: var(--accent-red); color: var(--accent-red); transform: rotate(-6deg); font-size: 14px; padding: 4px 10px;">
+              DANGEROUS 98
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust Strip -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 36px;">
+      <div style="border: 2px solid var(--line); background: var(--card); padding: 16px; box-shadow: 3px 3px 0px var(--line);">
+        <div style="font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700; color: var(--ink-soft);">01 // ATTACK FAMILIES</div>
+        <div style="font-family: 'IBM Plex Mono'; font-size: 16px; font-weight: 700; margin-top: 4px;">Fake KYC, Job Fees, Lottery & UPI</div>
+      </div>
+      <div style="border: 2px solid var(--line); background: var(--card); padding: 16px; box-shadow: 3px 3px 0px var(--line);">
+        <div style="font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700; color: var(--ink-soft);">02 // RESPONSE LATENCY</div>
+        <div style="font-family: 'IBM Plex Mono'; font-size: 16px; font-weight: 700; color: var(--accent-red); margin-top: 4px;">&lt; 2.5s Forensic Analysis</div>
+      </div>
+      <div style="border: 2px solid var(--line); background: var(--card); padding: 16px; box-shadow: 3px 3px 0px var(--line);">
+        <div style="font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700; color: var(--ink-soft);">03 // STATUTORY INTEGRATION</div>
+        <div style="font-family: 'IBM Plex Mono'; font-size: 16px; font-weight: 700; margin-top: 4px;">1930 & cybercrime.gov.in Ready</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intake Scanner Section -->
+  <section id="intake" class="container" style="padding-top: 56px; padding-bottom: 56px;">
+    <div class="case-card" style="padding: clamp(20px, 4vw, 40px); background: var(--card); position: relative;">
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--line); padding-bottom: 12px; margin-bottom: 20px;">
+        <div>
+          <span style="font-family: 'IBM Plex Mono'; font-size: 12px; font-weight: 700; color: var(--accent-red); text-transform: uppercase;">
+            MULTIMODAL FORENSIC INTAKE
+          </span>
+          <h2 class="font-serif" style="font-size: 26px; font-weight: 800; margin-top: 2px;">
+            Submit Suspect Artifact for Examination
+          </h2>
+        </div>
+        <span style="font-family: 'IBM Plex Mono'; font-size: 12px; font-weight: 700; border: 2px solid var(--line); padding: 4px 8px; background: var(--paper-2);">
+          TERMINAL #01
+        </span>
+      </div>
+
+      <!-- Scanner Tabs -->
+      <div style="display: flex; border-bottom: 2px solid var(--divider); margin-bottom: 20px; overflow-x: auto;">
+        <button class="tab-btn active" onclick="switchTab('message', this)">✉ Suspicious Message</button>
+        <button class="tab-btn" onclick="switchTab('link', this)">🔗 Fraudulent Link</button>
+        <button class="tab-btn" onclick="switchTab('screenshot', this)">📸 Screenshot Evidence</button>
+        <button class="tab-btn" onclick="switchTab('qr', this)">🔳 QR Code / UPI</button>
+      </div>
+
+      <!-- Input Form -->
+      <div id="tab-content" style="position: relative;">
+        <textarea id="scanner-input" class="scanner-textarea ruled-paper" placeholder="Paste the exact suspicious SMS, WhatsApp message, email excerpt, or recruiter message here..."></textarea>
+        
+        <!-- Laser Scanner Bar (Shown during scan) -->
+        <div id="laser-bar" style="display: none;" class="laser-line"></div>
+      </div>
+
+      <!-- Action Button & Counter -->
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: 18px; gap: 12px;">
+        <button id="btn-run-analysis" onclick="runAnalysis()" class="btn-case btn-case-primary" style="font-size: 16px; padding: 12px 28px;">
+          Analyze with CyberShield AI ↘
+        </button>
+        <span style="font-family: 'IBM Plex Mono'; font-size: 12px; color: var(--ink-soft);">
+          SHORTCUT: Ctrl + Enter to analyze
+        </span>
+      </div>
+
+      <!-- Sample Chips -->
+      <div style="margin-top: 28px; padding-top: 20px; border-top: 2px solid var(--divider);">
+        <div style="font-family: 'IBM Plex Mono'; font-size: 12px; font-weight: 700; color: var(--ink-soft); text-transform: uppercase;">
+          ⚡ TEST VERIFIED MODUS OPERANDI SAMPLES:
+        </div>
+        <div class="samples-grid">
+          <button class="sample-chip" onclick="loadSample('kyc')">
+            <span style="width: 8px; height: 8px; background: var(--accent-red);"></span>
+            Fake Bank KYC SMS
+          </button>
+          <button class="sample-chip" onclick="loadSample('job')">
+            <span style="width: 8px; height: 8px; background: var(--accent-red);"></span>
+            Amazon Job Deposit Scam
+          </button>
+          <button class="sample-chip" onclick="loadSample('lottery')">
+            <span style="width: 8px; height: 8px; background: var(--accent-red);"></span>
+            KBC 25 Lakh Lottery Bait
+          </button>
+          <button class="sample-chip" onclick="loadSample('courier')">
+            <span style="width: 8px; height: 8px; background: var(--accent-red);"></span>
+            India Post Rs 5 Fee Trap
+          </button>
+          <button class="sample-chip" onclick="loadSample('telugu')">
+            <span style="width: 8px; height: 8px; background: var(--accent-red);"></span>
+            Telugu Bank KYC (తెలుగు)
+          </button>
+          <button class="sample-chip" onclick="loadSample('safe')">
+            <span style="width: 8px; height: 8px; background: var(--accent-green);"></span>
+            Legitimate Utility Receipt
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Report Dossier (Appears on scan) -->
+  <section id="case-dossier" class="container" style="display: none; padding-bottom: 60px;">
+    <div class="case-card" style="padding: clamp(20px, 4vw, 40px); background: var(--card);">
+      
+      <!-- Dossier Header -->
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--line); padding-bottom: 14px; margin-bottom: 24px; gap: 12px;">
+        <div>
+          <span style="background: var(--accent-red); color: white; font-family: 'IBM Plex Mono'; font-size: 12px; font-weight: 700; padding: 2px 8px;">
+            CASE #CS-9182
+          </span>
+          <h2 class="font-serif" style="font-size: 28px; font-weight: 800; margin-top: 6px;">
+            Forensic Incident Examination Dossier
+          </h2>
+        </div>
+        <div style="font-family: 'IBM Plex Mono'; font-size: 12px; color: var(--ink-soft); text-align: right;">
+          TIMESTAMP: 04-OCT-2026 // 23:45 IST<br>
+          PROTOCOL: CLAUDE 3.5 SONNET + 11 HEURISTICS
+        </div>
+      </div>
+
+      <!-- Rubber Stamp & Threat Gauge Banner -->
+      <div style="background: var(--paper-2); border: 2px solid var(--line); padding: 24px; box-shadow: 4px 4px 0px var(--line); margin-bottom: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; align-items: center;">
+        
+        <!-- Rubber Stamp Slam Target -->
+        <div id="report-stamp-container" style="display: flex; justify-content: center; align-items: center;">
+          <div id="verdict-stamp" class="stamp-box shake-gravity" style="border-color: var(--accent-red); color: var(--accent-red); background: rgba(214,40,40,0.1); transform: rotate(-5deg); font-size: 26px; padding: 12px 24px;">
+            <div style="letter-spacing: 2px;">DANGEROUS</div>
+            <div style="font-size: 13px; opacity: 0.85; margin-top: 4px;">RISK INDEX: <span id="score-text">0</span> / 100</div>
+          </div>
+        </div>
+
+        <!-- Gauge Bar & Category -->
+        <div>
+          <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono'; font-size: 13px; font-weight: 700; margin-bottom: 6px;">
+            <span>THREAT PROBABILITY SCORE</span>
+            <span id="score-percent" style="color: var(--accent-red);">0%</span>
+          </div>
+          <div class="gauge-track">
+            <div id="score-gauge" class="gauge-fill"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono'; font-size: 11px; color: var(--ink-soft); margin-top: 4px;">
+            <span>0 SAFE</span>
+            <span>50 SUSPICIOUS</span>
+            <span>100 CRITICAL</span>
+          </div>
+
+          <div style="margin-top: 14px; font-family: 'IBM Plex Mono'; font-size: 12px; font-weight: 700; color: var(--ink-soft);">
+            SCAM MODUS OPERANDI: <span id="scam-family-text" style="color: var(--ink); text-decoration: underline;">Remote Job Advance Fee Scheme (89% match)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ruled Paper Highlighted Evidence Section -->
+      <div style="margin-bottom: 28px;">
+        <div style="font-family: 'IBM Plex Mono'; font-size: 12px; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; margin-bottom: 8px;">
+          ORIGINAL TRANSMISSION // EXACT SUBSTRING MARKER HIGHLIGHTS:
+        </div>
+        <div id="evidence-text" class="ruled-paper" style="border: 2px solid var(--line); padding: 20px; font-family: 'IBM Plex Mono'; font-size: 14px; line-height: 28px; box-shadow: 3px 3px 0px var(--line);">
+          <!-- Populated by JS with exact <mark> highlights -->
+        </div>
+      </div>
+
+      <!-- Plain Language Explanation -->
+      <div style="background: var(--paper-2); border: 2px solid var(--line); padding: 20px; margin-bottom: 28px; box-shadow: 3px 3px 0px var(--line);">
+        <div style="font-family: 'IBM Plex Mono'; font-size: 12px; font-weight: 700; color: var(--accent-red); margin-bottom: 6px;">
+          CRIME ANALYST VERDICT EXPLANATION:
+        </div>
+        <p id="explanation-text" style="font-size: 16px; font-weight: 600; line-height: 1.5; color: var(--ink);">
+          Loading analysis...
+        </p>
+      </div>
+
+      <!-- Tickable Checklist -->
+      <div style="margin-bottom: 32px;">
+        <div style="font-family: 'IBM Plex Mono'; font-size: 12px; font-weight: 700; color: var(--ink-soft); margin-bottom: 8px;">
+          🚨 IMMEDIATE ACTION PROTOCOL (Check items as you complete them):
+        </div>
+        <div id="checklist-items" style="display: flex; flex-direction: column; gap: 8px;">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Action Bar -->
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; border-top: 2px solid var(--line); padding-top: 20px; gap: 12px;">
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <button onclick="openFamilyModal()" class="btn-case" style="background: var(--paper-2);">
+            👨‍👩‍👧 Forward Warning to Family
+          </button>
+          <button onclick="openComplaintModal()" class="btn-case btn-case-primary">
+            📋 File 1930 Cybercrime Complaint
+          </button>
+        </div>
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn-case">
+          ↻ Examine Another Message
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Family Warning Card Modal -->
+  <div id="family-modal" class="modal-overlay">
+    <div class="case-card" style="padding: 24px; max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto;">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--line); padding-bottom: 8px; margin-bottom: 16px;">
+        <h3 class="font-serif" style="font-size: 20px; font-weight: 800;">Family Protect Warning Card</h3>
+        <button onclick="closeFamilyModal()" style="border: 2px solid var(--line); background: var(--card); font-family: 'IBM Plex Mono'; font-weight: 700; padding: 2px 8px; cursor: pointer;">✕</button>
+      </div>
+
+      <!-- Localized Warning Card Box -->
+      <div style="border: 3px solid var(--accent-red); background: var(--card); padding: 20px; box-shadow: 4px 4px 0px var(--line); margin-bottom: 18px;">
+        <div style="background: var(--accent-red); color: white; font-family: 'IBM Plex Mono'; font-size: 13px; font-weight: 800; padding: 6px 10px; margin-bottom: 12px;">
+          ⚠️ AMMA / NANNA / FAMILY ALERT: DO NOT CLICK!
+        </div>
+        <p style="font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 12px;">
+          This message was analyzed by CyberShield AI and confirmed as a dangerous scam attempt. Never share OTPs or pay UPI registration fees.
+        </p>
+        <div style="background: var(--paper-2); border: 1px solid var(--line); padding: 10px; font-size: 12px; margin-bottom: 12px;">
+          <strong>Detected Threats:</strong>
+          <ul style="margin-left: 18px; margin-top: 4px;">
+            <li>Demands upfront fee of Rs 1,499 for recruitment</li>
+            <li>Directs money transfer to unverified personal UPI handle</li>
+          </ul>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono'; font-size: 12px; font-weight: 700; color: var(--accent-red);">
+          <span>HELPLINE: 1930</span>
+          <span>cybercrime.gov.in</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <button onclick="shareWhatsApp()" class="btn-case" style="flex: 1; background: #25D366; color: white; border-color: var(--line);">
+          Share on WhatsApp ↗
+        </button>
+        <button onclick="copyFamilyText()" class="btn-case" style="flex: 1;">
+          Copy Text
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Complaint Helper Modal -->
+  <div id="complaint-modal" class="modal-overlay">
+    <div class="case-card" style="padding: 24px; max-width: 640px; width: 100%; max-height: 90vh; overflow-y: auto;">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--line); padding-bottom: 8px; margin-bottom: 16px;">
+        <div>
+          <span style="font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700; color: var(--accent-red);">1930 & I4C COMPLIANT DRAFT</span>
+          <h3 class="font-serif" style="font-size: 20px; font-weight: 800;">Official Cybercrime Incident Dossier</h3>
+        </div>
+        <button onclick="closeComplaintModal()" style="border: 2px solid var(--line); background: var(--card); font-family: 'IBM Plex Mono'; font-weight: 700; padding: 2px 8px; cursor: pointer;">✕</button>
+      </div>
+
+      <div style="background: rgba(214,40,40,0.1); border: 2px solid var(--accent-red); padding: 12px; font-size: 13px; font-weight: 600; margin-bottom: 16px;">
+        🚨 Lost money in the last 2 hours? Call <strong>1930</strong> immediately to freeze the transfer before bank settlement!
+      </div>
+
+      <div class="ruled-paper" style="border: 2px solid var(--line); padding: 14px; font-family: 'IBM Plex Mono'; font-size: 12px; line-height: 24px; max-height: 200px; overflow-y: auto; margin-bottom: 18px;">
+FORMAL CYBERCRIME COMPLAINT TO NATIONAL PORTAL (cybercrime.gov.in / 1930)
+========================================================================
+CASE IDENTIFIER: CS-9182
+INCIDENT CATEGORY: Job & Recruitment Fraud
+SUSPECT UPI HANDLE: recruit-amazon@ybl
+ESTIMATED LOSS: Rs. 1,499
+
+INCIDENT SUMMARY & FORENSIC FINDINGS:
+The victim received an unsolicited recruitment offer promising Rs 2,500 daily
+and demanding Rs 1,499 mandatory registration fee via personal UPI handle.
+Threat Index: 98/100 (DANGEROUS).
+
+DETECTED FRAUD INDICATORS:
+1. Demand for advance registration security deposit before job dispatch.
+2. Artificial time pressure tactic: "Slot reserved for 30 minutes".
+3. Unverified third-party UPI VPA impersonating Amazon India.
+========================================================================
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;">
+        <button onclick="alert('Dossier copied! Ready to paste into cybercrime.gov.in')" class="btn-case" style="flex: 1;">
+          Copy Complaint Text
+        </button>
+        <a href="https://cybercrime.gov.in" target="_blank" class="btn-case btn-case-primary" style="flex: 1; text-align: center;">
+          Go to cybercrime.gov.in ↗
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive JavaScript Engine -->
+  <script>
+    const SAMPLES = {
+      kyc: {
+        text: "URGENT ALERT: Dear SBI customer, your bank account #XXXX4021 will be BLOCKED within 12 hours due to pending KYC verification. Update PAN immediately at http://sbi-pan-kyc.top/update or call manager at +91-9876543210.",
+        verdict: "DANGEROUS",
+        score: 98,
+        family: "Banking SMS APK Phishing",
+        explanation: "High-pressure banking credential harvesting attack. Legitimate Indian banks never threaten account deactivation within 12 hours or host updates on disposable '.top' domains.",
+        flags: [
+          { phrase: "BLOCKED within 12 hours", severity: "danger", reason: "Panic trigger forcing irrational victim behavior" },
+          { phrase: "http://sbi-pan-kyc.top/update", severity: "danger", reason: "Insecure phishing link with disposable .top domain" },
+          { phrase: "+91-9876543210", severity: "danger", reason: "Unverified private mobile number impersonating bank desk" }
+        ],
+        actions: [
+          "DO NOT click the link or provide your PAN/Aadhaar number.",
+          "Do not share OTP with any caller claiming to be an SBI manager.",
+          "Forward this SMS to 1909 (TRAI Spam Reporting).",
+          "If bank credentials were entered, call SBI official support 1800-11-2211 immediately to freeze internet banking."
+        ]
+      },
+      job: {
+        text: "Congratulations! You have been shortlisted for Amazon India Remote Data Specialist. Daily earnings: Rs 2,500 - Rs 4,500. To activate your employee ID and dispatch laptop kit, send mandatory one-time registration bond fee of Rs 1,499 via UPI to recruit-amazon@ybl. Slot reserved for 30 minutes.",
+        verdict: "DANGEROUS",
+        score: 98,
+        family: "Remote Job Advance Fee Scheme",
+        explanation: "Advance-fee recruitment fraud. Authentic corporations like Amazon never solicit security deposits or registration fees through personal UPI handles.",
+        flags: [
+          { phrase: "mandatory one-time registration bond fee of Rs 1,499", severity: "danger", reason: "Advance fee fraud: Demands upfront money for employment" },
+          { phrase: "recruit-amazon@ybl", severity: "danger", reason: "Unverified personal UPI handle impersonating brand" },
+          { phrase: "Slot reserved for 30 minutes", severity: "danger", reason: "Artificial urgency designed to bypass critical thinking" }
+        ],
+        actions: [
+          "DO NOT transfer money to the UPI ID recruit-amazon@ybl.",
+          "Block the sender on WhatsApp/Telegram immediately.",
+          "Report the fraudulent UPI VPA in your payment app (Google Pay / PhonePe / Paytm).",
+          "File a formal report on cybercrime.gov.in."
+        ]
+      },
+      lottery: {
+        text: "Dear Customer, you have won Rs 25,00,000/- (Twenty Five Lakh Rupees) in Amitabh Bachchan KBC Sim Card Lucky Draw 2026! Contact Manager Rana Pratap Singh immediately on WhatsApp +91-8899001122 and pay Rs 12,500 government clearance tax.",
+        verdict: "DANGEROUS",
+        score: 98,
+        family: "KBC Sim Card Lucky Draw Scam",
+        explanation: "Unsolicited lottery scam targeting telecom subscribers. The impostor demands advance tax payments to release nonexistent funds.",
+        flags: [
+          { phrase: "Rs 25,00,000/- (Twenty Five Lakh Rupees)", severity: "danger", reason: "Unrealistic lottery bait" },
+          { phrase: "WhatsApp +91-8899001122", severity: "danger", reason: "Conducting official financial business over WhatsApp" },
+          { phrase: "pay Rs 12,500 government clearance tax", severity: "danger", reason: "Classic advance-tax clearance extortion" }
+        ],
+        actions: [
+          "Never pay tax or processing charges to claim a prize.",
+          "Do not share bank account or passbook photos.",
+          "Report number to WhatsApp anti-fraud desk."
+        ]
+      },
+      courier: {
+        text: "IndiaPost Alert: Your parcel consignment #IN98234190 could not be delivered due to incomplete street address. Please update your delivery address and pay pending Rs 5.00 re-attempt postage fee at https://indlapost-track.xyz/pay before 6:00 PM today.",
+        verdict: "DANGEROUS",
+        score: 96,
+        family: "Postal Consignment Re-delivery Phishing",
+        explanation: "Typosquatted micro-payment trap. The nominal Rs 5 fee is psychological bait to steal debit card credentials and intercept subsequent OTPs.",
+        flags: [
+          { phrase: "https://indlapost-track.xyz/pay", severity: "danger", reason: "Typosquatted domain (indlapost with 'l') on suspicious .xyz TLD" },
+          { phrase: "Rs 5.00 re-attempt postage fee", severity: "danger", reason: "Nominal micro-payment bait to trigger OTP interception" }
+        ],
+        actions: [
+          "Do not enter card number or CVV on non-governmental websites.",
+          "Official India Post portal is strictly indiapost.gov.in."
+        ]
+      },
+      telugu: {
+        text: "ముఖ్య గమనిక: ప్రియమైన వినియోగదారుడా, మీ బ్యాంక్ ఖాతా KYC గడువు ముగిసినందున ఈరోజు రాత్రి 8 గంటలకు నిలిపివేయబడుతుంది. వెంటనే ఆధార్ కార్డు నంబర్ నమోదు చేసి ఖాతాను పునరుద్ధరించండి: http://sbi-kyc-telugu.top/auth లేదంటే మీ ఖాతా శాశ్వతంగా బ్లాక్ చేయబడుతుంది.",
+        verdict: "DANGEROUS",
+        score: 98,
+        family: "Regional Banking Phishing (తెలుగు)",
+        explanation: "తెలుగు మాట్లాడే వినియోగదారులను లక్ష్యంగా చేసుకున్న నకిలీ బ్యాంక్ కేవైసీ మోసం. బ్యాంకులు ఎప్పుడూ ఇలాంటి అసలైనవి కాని లింకుల ద్వారా ఆధార్ అడగవు.",
+        flags: [
+          { phrase: "ఈరోజు రాత్రి 8 గంటలకు నిలిపివేయబడుతుంది", severity: "danger", reason: "కంగారు పెట్టి మోసం చేసే ఎత్తుగడ" },
+          { phrase: "http://sbi-kyc-telugu.top/auth", severity: "danger", reason: "నకిలీ వెబ్‌సైట్ లింక్ (.top డొమైన్)" }
+        ],
+        actions: [
+          "ఈ లింక్ పై క్లిక్ చేయకండి మరియు ఆధార్/ఓటీపీ వివరాలు ఇవ్వకండి.",
+          "వెంటనే మీ స్థానిక బ్యాంక్ బ్రాంచ్‌ను సంప్రదించండి.",
+          "సైబర్ హెల్ప్‌లైన్ 1930 కు కాల్ చేయండి."
+        ]
+      },
+      safe: {
+        text: "Dear Consumer, payment of Rs 1,420.00 towards Electricity Bill for Service #882910 has been received successfully via BillDesk on 04-Oct-2026 with Transaction ID: TXN99120482. Official portal: https://tssouthernpower.com. Thank you for choosing green billing.",
+        verdict: "SAFE",
+        score: 4,
+        family: "Authorized Transaction Notification",
+        explanation: "Authentic utility payment receipt. Contains verifiable transaction ID, uses official state power HTTPS domain, and solicits zero passwords or actions.",
+        flags: [
+          { phrase: "https://tssouthernpower.com", severity: "safe", reason: "Official secure state electricity portal" }
+        ],
+        actions: [
+          "No defensive action required. Retain receipt for your records."
+        ]
+      }
+    };
+
+    let activeData = SAMPLES.job;
+
+    function loadSample(key) {
+      const s = SAMPLES[key];
+      if (!s) return;
+      activeData = s;
+      document.getElementById('scanner-input').value = s.text;
+      runAnalysis();
+    }
+
+    function switchTab(type, el) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      const textarea = document.getElementById('scanner-input');
+      if (type === 'link') {
+        textarea.placeholder = "Enter suspicious URL (e.g. http://sbi-kyc-reward.top/update or shortener bit.ly/pan-update)...";
+      } else if (type === 'screenshot') {
+        textarea.placeholder = "Upload or drag-and-drop screenshot evidence... (Analyzing OCR text)";
+      } else if (type === 'qr') {
+        textarea.placeholder = "Upload QR code to decode UPI VPA string (e.g. upi://pay?pa=...)...";
+      } else {
+        textarea.placeholder = "Paste the exact suspicious SMS, WhatsApp message, email excerpt, or recruiter message here...";
+      }
+    }
+
+    function runAnalysis() {
+      const btn = document.getElementById('btn-run-analysis');
+      const laser = document.getElementById('laser-bar');
+      btn.innerHTML = "Examinating with Claude 3.5 Sonnet...";
+      btn.style.opacity = '0.7';
+      laser.style.display = 'block';
+
+      setTimeout(() => {
+        btn.innerHTML = "Analyze with CyberShield AI ↘";
+        btn.style.opacity = '1';
+        laser.style.display = 'none';
+        renderReport(activeData);
+      }, 900);
+    }
+
+    function renderReport(data) {
+      const dossier = document.getElementById('case-dossier');
+      dossier.style.display = 'block';
+      dossier.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      // Animate score counter
+      const scoreText = document.getElementById('score-text');
+      const scorePercent = document.getElementById('score-percent');
+      const gauge = document.getElementById('score-gauge');
+      const stamp = document.getElementById('verdict-stamp');
+      
+      const isDangerous = data.verdict === 'DANGEROUS';
+      const isSafe = data.verdict === 'SAFE';
+
+      stamp.className = 'stamp-box shake-gravity';
+      stamp.innerHTML = `<div style="letter-spacing: 2px;">${data.verdict}</div><div style="font-size: 13px; opacity: 0.85; margin-top: 4px;">RISK INDEX: ${data.score} / 100</div>`;
+
+      if (isDangerous) {
+        stamp.style.borderColor = 'var(--accent-red)';
+        stamp.style.color = 'var(--accent-red)';
+        stamp.style.background = 'rgba(214,40,40,0.1)';
+        gauge.style.background = 'var(--accent-red)';
+      } else if (isSafe) {
+        stamp.style.borderColor = 'var(--accent-green)';
+        stamp.style.color = 'var(--accent-green)';
+        stamp.style.background = 'rgba(47,125,79,0.1)';
+        gauge.style.background = 'var(--accent-green)';
+      }
+
+      gauge.style.width = data.score + '%';
+      scorePercent.innerText = data.score + '%';
+
+      let current = 0;
+      const countTimer = setInterval(() => {
+        if (current <= data.score) {
+          scoreText.innerText = current;
+          current += 4;
+        } else {
+          scoreText.innerText = data.score;
+          clearInterval(countTimer);
+        }
+      }, 20);
+
+      document.getElementById('scam-family-text').innerText = data.family;
+      document.getElementById('explanation-text').innerText = data.explanation;
+
+      // Evidence highlighting
+      let raw = data.text;
+      data.flags.forEach(f => {
+        const cls = f.severity === 'danger' ? 'evidence-danger' : f.severity === 'suspicious' ? 'evidence-suspicious' : 'evidence-safe';
+        raw = raw.replace(f.phrase, `<mark class="${cls}" title="${f.reason}">$&</mark>`);
+      });
+      document.getElementById('evidence-text').innerHTML = raw;
+
+      // Checklist
+      const checklistContainer = document.getElementById('checklist-items');
+      checklistContainer.innerHTML = '';
+      data.actions.forEach((act, idx) => {
+        const row = document.createElement('label');
+        row.style.display = 'flex';
+        row.style.alignItems = 'flex-start';
+        row.style.gap = '10px';
+        row.style.padding = '8px 12px';
+        row.style.border = '2px solid var(--line)';
+        row.style.background = 'var(--paper-2)';
+        row.style.fontFamily = 'IBM Plex Mono';
+        row.style.fontSize = '13px';
+        row.style.cursor = 'pointer';
+        row.innerHTML = `<input type="checkbox" onchange="toggleCheck(this)" style="margin-top: 4px;"> <span>${act}</span>`;
+        checklistContainer.appendChild(row);
+      });
+    }
+
+    function toggleCheck(el) {
+      const span = el.nextElementSibling;
+      if (el.checked) {
+        span.style.textDecoration = 'line-through';
+        span.style.opacity = '0.6';
+      } else {
+        span.style.textDecoration = 'none';
+        span.style.opacity = '1';
+      }
+    }
+
+    function openFamilyModal() {
+      document.getElementById('family-modal').classList.add('active');
+    }
+    function closeFamilyModal() {
+      document.getElementById('family-modal').classList.remove('active');
+    }
+    function openComplaintModal() {
+      document.getElementById('complaint-modal').classList.add('active');
+    }
+    function closeComplaintModal() {
+      document.getElementById('complaint-modal').classList.remove('active');
+    }
+
+    function shareWhatsApp() {
+      const text = encodeURIComponent("⚠️ Family Alert: Don't click this link or pay any fee! CyberShield AI verified it as a scam. Emergency helpline: 1930");
+      window.open('https://wa.me/?text=' + text, '_blank');
+    }
+    function copyFamilyText() {
+      alert("Family warning text copied to clipboard!");
+    }
+
+    function setLang(code) {
+      document.querySelectorAll('#lang-en, #lang-te, #lang-hi').forEach(b => {
+        b.style.background = 'transparent';
+        b.style.color = 'var(--ink-soft)';
+      });
+      const active = document.getElementById('lang-' + code);
+      active.style.background = 'var(--card)';
+      active.style.color = 'var(--ink)';
+      if (code === 'te') {
+        loadSample('telugu');
+      }
+    }
+
+    // Default setup
+    document.getElementById('scanner-input').value = SAMPLES.job.text;
+  </script>
+</body>
+</html>
