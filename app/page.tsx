@@ -94,7 +94,7 @@ function HomeContent() {
         />
 
         {/* Scanner & Live Analysis Section */}
-        <div ref={scannerRef} className="max-w-container mx-auto px-4 md:px-8 py-12">
+        <div ref={scannerRef} className="max-w-container mx-auto px-3 sm:px-4 md:px-8 py-6 sm:py-12">
           <Scanner
             language={language}
             onAnalyze={handleAnalyze}
@@ -117,23 +117,23 @@ function HomeContent() {
         </div>
 
         {/* How It Works: Numbered Evidence Tags */}
-        <section className="border-t-2 border-b-2 border-line bg-paper-2 py-16 md:py-24">
-          <div className="max-w-container mx-auto px-4 md:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-12">
-              <span className="font-mono text-12 font-bold tracking-widest text-accent-red uppercase">
+        <section className="border-t-2 border-b-2 border-line bg-paper-2 py-10 sm:py-16 md:py-24">
+          <div className="max-w-container mx-auto px-3 sm:px-4 md:px-8">
+            <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+              <span className="font-mono text-11 sm:text-12 font-bold tracking-widest text-accent-red uppercase">
                 INVESTIGATION PROCEDURE
               </span>
-              <h2 className="font-serif text-32 md:text-48 font-bold text-ink mt-2">
+              <h2 className="font-serif text-26 sm:text-36 md:text-48 font-bold text-ink mt-1 sm:mt-2">
                 How CyberShield Dissects Scams
               </h2>
-              <p className="font-sans text-16 text-ink-soft mt-3">
+              <p className="font-sans text-14 sm:text-16 text-ink-soft mt-2 sm:mt-3">
                 Three rigorous forensic steps designed to shield Indian citizens from financial fraud and credential theft.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
               {/* Step 1 */}
-              <div className="case-card p-6 bg-card relative">
+              <div className="case-card p-4 sm:p-6 bg-card relative">
                 <div className="flex items-center justify-between border-b-2 border-divider pb-3 mb-4">
                   <span className="stamp-box border-accent-red text-accent-red text-14 font-bold">
                     TAG 01
@@ -190,26 +190,26 @@ function HomeContent() {
         </section>
 
         {/* Scam Types Grid with Forensic Defense Tips */}
-        <section className="py-16 md:py-24 bg-paper">
-          <div className="max-w-container mx-auto px-4 md:px-8">
-            <div className="flex flex-wrap items-end justify-between mb-12 gap-4">
+        <section className="py-10 sm:py-16 md:py-24 bg-paper">
+          <div className="max-w-container mx-auto px-3 sm:px-4 md:px-8">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-12 gap-2 sm:gap-4">
               <div>
-                <span className="font-mono text-12 font-bold tracking-widest text-accent-red uppercase">
+                <span className="font-mono text-11 sm:text-12 font-bold tracking-widest text-accent-red uppercase">
                   INTELLIGENCE BULLETIN
                 </span>
-                <h2 className="font-serif text-32 md:text-48 font-bold text-ink mt-2">
+                <h2 className="font-serif text-24 sm:text-36 md:text-48 font-bold text-ink mt-1 sm:mt-2">
                   Top 6 Modus Operandi in India
                 </h2>
               </div>
-              <span className="font-mono text-12 text-ink-soft font-bold">
+              <span className="font-mono text-11 sm:text-12 text-ink-soft font-bold">
                 SOURCE: I4C & INDIAN CYBER POLICE DATA
               </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {/* Card 1 */}
-              <div className="p-6 border-2 border-line bg-card shadow-hard-sm">
-                <div className="font-mono text-12 font-bold text-accent-red mb-1">
+              <div className="p-4 sm:p-6 border-2 border-line bg-card shadow-hard-sm">
+                <div className="font-mono text-11 sm:text-12 font-bold text-accent-red mb-1">
                   01 // BANKING & PAN DEACTIVATION
                 </div>
                 <h3 className="font-serif text-18 font-bold text-ink mb-2">

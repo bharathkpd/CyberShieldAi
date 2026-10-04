@@ -87,25 +87,25 @@ Helpline: 1930 | Report online: https://cybercrime.gov.in`;
   };
 
   return (
-    <div id="case-report-dossier" className="case-card bg-card border-2 border-line shadow-hard p-6 md:p-10 relative my-10">
+    <div id="case-report-dossier" className="case-card bg-card border-2 border-line shadow-hard p-4 sm:p-6 md:p-10 relative my-6 sm:my-10">
       {/* Dossier Header Bar */}
-      <div className="flex flex-wrap items-center justify-between border-b-2 border-line pb-4 mb-8 gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-line pb-3 sm:pb-4 mb-6 sm:mb-8 gap-3">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="font-mono text-12 font-bold px-2 py-0.5 bg-accent-red text-white uppercase">
+            <span className="font-mono text-11 sm:text-12 font-bold px-2 py-0.5 bg-accent-red text-white uppercase shrink-0">
               {t.report.caseNumber} #{result.id}
             </span>
-            <span className="font-mono text-12 text-ink-soft uppercase font-semibold">
+            <span className="font-mono text-11 sm:text-12 text-ink-soft uppercase font-semibold truncate">
               INPUT: {result.inputType.toUpperCase()}
             </span>
           </div>
-          <h2 className="font-serif text-28 md:text-36 font-extrabold text-ink m-0">
+          <h2 className="font-serif text-22 sm:text-28 md:text-36 font-extrabold text-ink m-0">
             Forensic Incident Dossier
           </h2>
         </div>
 
-        <div className="flex items-center gap-2 font-mono text-12 text-ink-soft">
-          <Clock className="w-4 h-4" />
+        <div className="flex items-center gap-2 font-mono text-11 sm:text-12 text-ink-soft">
+          <Clock className="w-4 h-4 shrink-0" />
           <span>
             {new Date(result.timestamp).toLocaleDateString()} //{" "}
             {new Date(result.timestamp).toLocaleTimeString([], {
@@ -117,9 +117,9 @@ Helpline: 1930 | Report online: https://cybercrime.gov.in`;
       </div>
 
       {/* Top Banner: Rubber Stamp + Ink Gauge */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-paper-2 border-2 border-line p-6 mb-8 shadow-hard-sm">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center bg-paper-2 border-2 border-line p-4 sm:p-6 mb-6 sm:mb-8 shadow-hard-sm">
         {/* Rubber Stamp Left */}
-        <div className="lg:col-span-5 flex justify-center py-2">
+        <div className="lg:col-span-5 flex justify-center py-1 sm:py-2">
           <StampVerdict verdict={result.verdict} riskScore={result.riskScore} />
         </div>
 
@@ -130,12 +130,12 @@ Helpline: 1930 | Report online: https://cybercrime.gov.in`;
       </div>
 
       {/* Metadata Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-        <div className="p-4 border-2 border-line bg-card shadow-hard-sm">
-          <span className="font-mono text-12 font-bold text-ink-soft uppercase block mb-1">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
+        <div className="p-3.5 sm:p-4 border-2 border-line bg-card shadow-hard-sm">
+          <span className="font-mono text-11 sm:text-12 font-bold text-ink-soft uppercase block mb-1">
             THREAT CLASSIFICATION
           </span>
-          <span className="font-serif text-18 font-bold text-ink block leading-snug">
+          <span className="font-serif text-16 sm:text-18 font-bold text-ink block leading-snug">
             {result.category}
           </span>
         </div>
@@ -160,17 +160,17 @@ Helpline: 1930 | Report online: https://cybercrime.gov.in`;
       </div>
 
       {/* Evidence Panel with Marker Highlights */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-2">
+      <div className="mb-6 sm:mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 gap-1">
           <div>
-            <h3 className="font-serif text-20 font-bold text-ink m-0">
+            <h3 className="font-serif text-18 sm:text-20 font-bold text-ink m-0">
               {t.report.evidenceHeading}
             </h3>
-            <span className="font-sans text-12 text-ink-soft">
+            <span className="font-sans text-11 sm:text-12 text-ink-soft">
               {t.report.evidenceSub}
             </span>
           </div>
-          <span className="font-mono text-12 font-bold text-accent-red uppercase">
+          <span className="font-mono text-11 sm:text-12 font-bold text-accent-red uppercase">
             {result.redFlags.length} RED FLAGS FLAGGED
           </span>
         </div>
@@ -182,8 +182,8 @@ Helpline: 1930 | Report online: https://cybercrime.gov.in`;
       </div>
 
       {/* Red Flag Accordion Cards */}
-      <div className="mb-8">
-        <h3 className="font-serif text-20 font-bold text-ink mb-3">
+      <div className="mb-6 sm:mb-8">
+        <h3 className="font-serif text-18 sm:text-20 font-bold text-ink mb-3">
           {t.report.redFlagsHeading}
         </h3>
         <div>
@@ -194,12 +194,12 @@ Helpline: 1930 | Report online: https://cybercrime.gov.in`;
       </div>
 
       {/* Plain-Language Forensic Explanation with Typewriter Effect */}
-      <div className="border-2 border-line bg-card p-6 shadow-hard-sm mb-8">
-        <div className="flex items-center gap-2 mb-2 font-mono text-12 font-bold uppercase text-ink-soft">
-          <Sparkles className="w-4 h-4 text-accent-red" />
+      <div className="border-2 border-line bg-card p-4 sm:p-6 shadow-hard-sm mb-6 sm:mb-8">
+        <div className="flex items-center gap-2 mb-2 font-mono text-11 sm:text-12 font-bold uppercase text-ink-soft">
+          <Sparkles className="w-4 h-4 text-accent-red shrink-0" />
           <span>{t.report.explanationHeading}</span>
         </div>
-        <p className="font-sans text-16 md:text-18 text-ink leading-relaxed font-medium m-0 min-h-[50px]">
+        <p className="font-sans text-15 sm:text-17 md:text-18 text-ink leading-relaxed font-medium m-0 min-h-[48px]">
           {displayedExplanation}
           {displayedExplanation.length < targetExplanation.length && (
             <span className="inline-block w-2 h-4 bg-accent-red ml-1 animate-pulse" />
@@ -208,7 +208,7 @@ Helpline: 1930 | Report online: https://cybercrime.gov.in`;
       </div>
 
       {/* What To Do Now (Tickable Checklist) */}
-      <div className="mb-8">
+      <div className="mb-6 sm:mb-8">
         <Checklist items={result.actions} />
       </div>
 

@@ -44,35 +44,35 @@ export const EvidenceCard: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full max-w-lg mx-auto select-none">
+    <div className="relative w-full max-w-md sm:max-w-lg mx-auto select-none">
       {/* Paperclip top decoration */}
-      <div className="absolute -top-4 left-10 z-20 text-ink-soft">
-        <Paperclip className="w-8 h-8 rotate-45 stroke-[2.5]" />
+      <div className="absolute -top-3.5 left-6 sm:left-10 z-20 text-ink-soft">
+        <Paperclip className="w-6 h-6 sm:w-8 sm:h-8 rotate-45 stroke-[2.5]" />
       </div>
 
       {/* Tilted Case File Card */}
       <motion.div
-        animate={{ rotate: [-1.5, -2.5, -1.5] }}
+        animate={{ rotate: [-0.5, -2, -0.5] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="case-card p-4 sm:p-6 md:p-8 relative bg-card tape-top-left tape-top-right transform -rotate-1 sm:-rotate-3"
+        className="case-card p-3.5 sm:p-6 md:p-8 relative bg-card tape-top-left tape-top-right transform rotate-0 sm:-rotate-2 shadow-hard-sm sm:shadow-hard"
       >
         {/* Case File Metadata Header */}
-        <div className="flex items-center justify-between border-b-2 border-line pb-2.5 mb-3 sm:mb-4">
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-11 sm:text-12 font-bold bg-accent-red text-white px-2 py-0.5">
+        <div className="flex items-center justify-between border-b-2 border-line pb-2 mb-3 sm:mb-4 gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <span className="font-mono text-10 sm:text-12 font-bold bg-accent-red text-white px-1.5 sm:px-2 py-0.5 shrink-0">
               CASE #CS-2041
             </span>
-            <span className="font-mono text-11 sm:text-12 text-ink-soft font-semibold truncate max-w-[140px] sm:max-w-none">
-              EXHIBIT A // SMS INTERCEPT
+            <span className="font-mono text-10 sm:text-12 text-ink-soft font-semibold truncate">
+              EXHIBIT A // SMS
             </span>
           </div>
-          <span className="font-mono text-11 sm:text-12 text-ink-soft font-bold">
+          <span className="font-mono text-10 sm:text-12 text-ink-soft font-bold shrink-0">
             CONFIDENTIAL
           </span>
         </div>
 
         {/* Evidence Ruled Paper Content */}
-        <div className="ruled-paper border-2 border-divider p-3 sm:p-4 mb-3 sm:mb-4 font-mono text-13 sm:text-14 text-ink leading-relaxed break-words">
+        <div className="ruled-paper border-2 border-divider p-2.5 sm:p-4 mb-3 sm:mb-4 font-mono text-12 sm:text-14 text-ink leading-relaxed sm:leading-loose break-words">
           <div className="text-11 sm:text-12 text-ink-soft font-bold mb-1">
             ORIGIN: +91-98765-XXXXX // SENDER TAG: "VK-SBIBNK"
           </div>

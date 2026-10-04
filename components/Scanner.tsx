@@ -46,11 +46,11 @@ export const Scanner: React.FC<ScannerProps> = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const tabs: { id: ScanInputType; label: string; icon: React.ReactNode }[] = [
-    { id: "text", label: t.scanner.tabText, icon: <MessageSquare className="w-4 h-4" /> },
-    { id: "url", label: t.scanner.tabLink, icon: <Link2 className="w-4 h-4" /> },
-    { id: "image", label: t.scanner.tabImage, icon: <ImageIcon className="w-4 h-4" /> },
-    { id: "qr", label: t.scanner.tabQR, icon: <QrCode className="w-4 h-4" /> },
+  const tabs: { id: ScanInputType; shortLabel: string; label: string; icon: React.ReactNode }[] = [
+    { id: "text", shortLabel: "Message", label: t.scanner.tabText, icon: <MessageSquare className="w-4 h-4 shrink-0" /> },
+    { id: "url", shortLabel: "Link", label: t.scanner.tabLink, icon: <Link2 className="w-4 h-4 shrink-0" /> },
+    { id: "image", shortLabel: "Screenshot", label: t.scanner.tabImage, icon: <ImageIcon className="w-4 h-4 shrink-0" /> },
+    { id: "qr", shortLabel: "QR / UPI", label: t.scanner.tabQR, icon: <QrCode className="w-4 h-4 shrink-0" /> },
   ];
 
   // Keyboard shortcut: Ctrl + Enter / Cmd + Enter
@@ -174,37 +174,38 @@ export const Scanner: React.FC<ScannerProps> = ({
   };
 
   return (
-    <div id="scanner-intake" className="case-card bg-card border-2 border-line shadow-hard p-6 md:p-8 relative">
+    <div id="scanner-intake" className="case-card bg-card border-2 border-line shadow-hard p-4 sm:p-6 md:p-8 relative">
       {/* Evidence Intake Banner */}
-      <div className="flex flex-wrap items-center justify-between border-b-2 border-line pb-4 mb-6 gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-line pb-3 sm:pb-4 mb-4 sm:mb-6 gap-2 sm:gap-3">
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 bg-accent-red" />
-          <h2 className="font-serif text-24 md:text-32 font-bold text-ink m-0">
+          <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-accent-red shrink-0" />
+          <h2 className="font-serif text-20 sm:text-26 md:text-32 font-bold text-ink m-0">
             {t.scanner.title}
           </h2>
         </div>
-        <div className="font-mono text-12 text-ink-soft flex items-center gap-3">
-          <span className="hidden sm:inline">SECURITY LEVEL: RESTRICTED</span>
-          <span className="border border-line px-2 py-0.5 bg-paper font-bold">
+        <div className="font-mono text-11 sm:text-12 text-ink-soft flex items-center gap-2 sm:gap-3">
+          <span className="hidden md:inline">SECURITY LEVEL: RESTRICTED</span>
+          <span className="border border-line px-1.5 sm:px-2 py-0.5 bg-paper font-bold">
             CASE FILE INTAKE
           </span>
         </div>
       </div>
 
       {/* Tabs with sliding underline indicator */}
-      <div className="flex border-b-2 border-divider relative mb-6 overflow-x-auto">
+      <div className="flex border-b-2 border-divider relative mb-4 sm:mb-6 overflow-x-auto no-scrollbar">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
           return (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex-1 min-w-[68px] sm:min-w-0 py-2.5 sm:py-3 px-1.5 sm:px-3 flex items-center justify-center gap-1 sm:gap-2 font-mono text-11 sm:text-13 md:text-14 font-bold transition-colors cursor-pointer relative shrink-0 sm:shrink ${
+              className={`flex-1 min-w-[70px] sm:min-w-0 py-2.5 sm:py-3 px-1.5 sm:px-3 flex items-center justify-center gap-1.5 sm:gap-2 font-mono text-11 sm:text-13 md:text-14 font-bold transition-colors cursor-pointer relative shrink-0 sm:shrink ${
                 isActive ? "text-accent-red" : "text-ink-soft hover:text-ink"
               }`}
             >
-              <span className="shrink-0">{tab.icon}</span>
-              <span className="truncate">{tab.label}</span>
+              <span>{tab.icon}</span>
+              <span className="sm:hidden">{tab.shortLabel}</span>
+              <span className="hidden sm:inline truncate">{tab.label}</span>
               {isActive && (
                 <motion.div
                   layoutId="activeTabIndicator"
@@ -218,7 +219,7 @@ export const Scanner: React.FC<ScannerProps> = ({
       </div>
 
       {/* Tab Panels */}
-      <div className="mb-6">
+      <div className="mb-5 sm:mb-6">
         {activeTab === "text" && (
           <div className="relative">
             <textarea
@@ -226,12 +227,12 @@ export const Scanner: React.FC<ScannerProps> = ({
               value={textContent}
               onChange={(e) => setTextContent(e.target.value.slice(0, 5000))}
               placeholder={t.scanner.placeholderText}
-              rows={6}
-              className="w-full p-4 border-2 border-line font-mono text-14 text-ink ruled-paper focus:border-accent-red focus-visible:outline-none resize-y min-h-[160px]"
+              rows={5}
+              className="w-full p-3 sm:p-4 border-2 border-line font-mono text-13 sm:text-14 text-ink ruled-paper focus:border-accent-red focus-visible:outline-none resize-y min-h-[140px] sm:min-h-[160px]"
             />
-            <div className="flex justify-between items-center mt-2 font-mono text-12 text-ink-soft">
-              <span>{t.scanner.shortcuts}</span>
-              <span className={textContent.length >= 4800 ? "text-accent-red font-bold" : ""}>
+            <div className="flex justify-between items-center mt-2 font-mono text-11 sm:text-12 text-ink-soft">
+              <span className="hidden sm:inline">{t.scanner.shortcuts}</span>
+              <span className={textContent.length >= 4800 ? "text-accent-red font-bold ml-auto" : "ml-auto sm:ml-0"}>
                 {textContent.length} / 5000 {t.scanner.charCount}
               </span>
             </div>
@@ -340,11 +341,11 @@ export const Scanner: React.FC<ScannerProps> = ({
       </div>
 
       {/* Primary Action Button */}
-      <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t-2 border-divider">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 pt-4 border-t-2 border-divider">
         <button
           onClick={handleSubmit}
           disabled={isLoading}
-          className="btn-case btn-case-primary text-16 py-3.5 px-8 font-bold shadow-hard w-full sm:w-auto"
+          className="btn-case btn-case-primary text-15 sm:text-16 py-3.5 px-8 font-bold shadow-hard w-full sm:w-auto text-center justify-center"
         >
           {isLoading ? (
             <span className="flex items-center gap-2">
@@ -359,19 +360,19 @@ export const Scanner: React.FC<ScannerProps> = ({
           )}
         </button>
 
-        <span className="font-mono text-12 text-ink-soft hidden md:inline-block">
+        <span className="font-mono text-11 sm:text-12 text-ink-soft hidden md:inline-block">
           {t.scanner.shortcuts}
         </span>
       </div>
 
       {/* Sample Chips Section */}
-      <div className="mt-8 pt-6 border-t-2 border-divider">
-        <div className="font-mono text-12 font-bold tracking-wider text-ink-soft uppercase mb-3 flex items-center gap-2">
-          <Sparkles className="w-3.5 h-3.5 text-accent-red" />
+      <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t-2 border-divider">
+        <div className="font-mono text-11 sm:text-12 font-bold tracking-wider text-ink-soft uppercase mb-3 flex items-center gap-2">
+          <Sparkles className="w-3.5 h-3.5 text-accent-red shrink-0" />
           <span>{t.scanner.samplesLabel}</span>
         </div>
 
-        <div className="flex flex-wrap gap-2.5">
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-2.5">
           {SAMPLE_SCAMS.map((sample) => {
             const isDanger = sample.expectedVerdict === "DANGEROUS";
             return (
@@ -379,14 +380,14 @@ export const Scanner: React.FC<ScannerProps> = ({
                 key={sample.id}
                 onClick={() => loadSample(sample)}
                 disabled={isLoading}
-                className="btn-case text-12 py-1.5 px-3 bg-paper-2 hover:bg-card flex items-center gap-2 text-ink"
+                className="btn-case text-11 sm:text-12 py-2 px-2.5 sm:px-3 bg-paper-2 hover:bg-card flex items-center justify-start gap-2 text-ink text-left w-full sm:w-auto"
               >
                 <span
-                  className={`w-2 h-2 ${
+                  className={`w-2 h-2 shrink-0 ${
                     isDanger ? "bg-accent-red" : "bg-accent-green"
                   }`}
                 />
-                <span className="font-bold">{sample.title}</span>
+                <span className="font-bold truncate">{sample.title}</span>
               </button>
             );
           })}

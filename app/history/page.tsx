@@ -81,22 +81,22 @@ function HistoryContent() {
         }}
       />
 
-      <main className="flex-1 max-w-container mx-auto px-4 md:px-8 py-10 w-full">
+      <main className="flex-1 max-w-container mx-auto px-3 sm:px-4 md:px-8 py-6 sm:py-10 w-full">
         {/* Header */}
-        <div className="flex flex-wrap items-center justify-between border-b-2 border-line pb-4 mb-8 gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-line pb-3 sm:pb-4 mb-6 sm:mb-8 gap-3 sm:gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="w-2.5 h-2.5 bg-accent-red" />
-              <span className="font-mono text-12 font-bold tracking-widest text-accent-red uppercase">
+              <span className="w-2.5 h-2.5 bg-accent-red shrink-0" />
+              <span className="font-mono text-11 sm:text-12 font-bold tracking-widest text-accent-red uppercase truncate max-w-[260px] sm:max-w-none">
                 LOCAL EVIDENCE REPOSITORY // LOCALSTORAGE PERSISTENT
               </span>
             </div>
-            <h1 className="font-serif text-32 md:text-48 font-bold text-ink m-0">
+            <h1 className="font-serif text-24 sm:text-36 md:text-48 font-bold text-ink m-0">
               Investigation Case Archives
             </h1>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             {history.length > 0 && (
               <button
                 onClick={() => setConfirmClearOpen(true)}

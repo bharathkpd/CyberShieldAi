@@ -35,27 +35,27 @@ export default function AboutPage() {
         }}
       />
 
-      <main className="flex-1 max-w-container mx-auto px-4 md:px-8 py-10 w-full">
+      <main className="flex-1 max-w-container mx-auto px-3 sm:px-4 md:px-8 py-6 sm:py-10 w-full">
         {/* Header */}
-        <div className="border-b-2 border-line pb-4 mb-8">
+        <div className="border-b-2 border-line pb-3 sm:pb-4 mb-6 sm:mb-8">
           <div className="flex items-center gap-2 mb-1">
-            <span className="w-2.5 h-2.5 bg-accent-red" />
-            <span className="font-mono text-12 font-bold tracking-widest text-accent-red uppercase">
+            <span className="w-2.5 h-2.5 bg-accent-red shrink-0" />
+            <span className="font-mono text-11 sm:text-12 font-bold tracking-widest text-accent-red uppercase truncate max-w-[260px] sm:max-w-none">
               TECHNICAL SPECIFICATIONS & METHODOLOGY
             </span>
           </div>
-          <h1 className="font-serif text-32 md:text-48 font-bold text-ink m-0">
+          <h1 className="font-serif text-24 sm:text-36 md:text-48 font-bold text-ink m-0">
             About CyberShield AI
           </h1>
-          <p className="font-sans text-16 text-ink-soft mt-2 max-w-2xl leading-relaxed">
+          <p className="font-sans text-14 sm:text-16 text-ink-soft mt-2 max-w-2xl leading-relaxed">
             A hackathon-grade forensic scam and cybercrime detection platform designed to protect citizens from financial loss, digital extortion, and credential theft across India.
           </p>
         </div>
 
         {/* 4 Pillars Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8 mb-8 sm:mb-12">
           {/* Pillar 1: Dual-Engine Forensic Architecture */}
-          <div className="case-card p-6 bg-card">
+          <div className="case-card p-4 sm:p-6 bg-card">
             <div className="flex items-center gap-3 border-b-2 border-divider pb-3 mb-4">
               <Cpu className="w-6 h-6 text-accent-red stroke-[2]" />
               <h2 className="font-serif text-20 font-bold text-ink m-0">

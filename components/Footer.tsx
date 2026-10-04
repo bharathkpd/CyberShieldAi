@@ -47,10 +47,10 @@ export const Footer: React.FC<FooterProps> = ({ language }) => {
               <p className="font-sans text-14 text-ink font-semibold mb-3">
                 {t.footer.helplineDesc}
               </p>
-              <div className="flex flex-wrap items-center gap-3">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
                 <a
                   href="tel:1930"
-                  className="btn-case btn-case-primary text-13 py-1.5 px-3 font-bold"
+                  className="btn-case btn-case-primary text-13 py-2 px-3 font-bold text-center justify-center w-full sm:w-auto"
                 >
                   Call Helpline 1930
                 </a>
@@ -58,7 +58,7 @@ export const Footer: React.FC<FooterProps> = ({ language }) => {
                   href="https://cybercrime.gov.in"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-case text-13 py-1.5 px-3 bg-card font-bold flex items-center gap-1"
+                  className="btn-case text-13 py-2 px-3 bg-card font-bold flex items-center justify-center gap-1 w-full sm:w-auto text-center"
                 >
                   <span>cybercrime.gov.in</span>
                   <ExternalLink className="w-3.5 h-3.5" />
