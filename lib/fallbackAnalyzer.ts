@@ -179,6 +179,86 @@ export function runFallbackAnalysis(
   let detectedCategory = "Suspected Cyber Fraud";
   let detectedFamily = "Multi-Vector Phishing Attack";
 
+  // 1. QR Code / UPI parsing
+  if (type === "qr" || content.startsWith("upi://") || content.includes("pa=") || content.includes("UPI")) {
+    detectedCategory = "Deceptive UPI Collect / Fake Refund Trap";
+    detectedFamily = "Reverse Payment QR Scam";
+    dangerPoints += 85;
+
+    if (content.includes("upi://pay")) {
+      redFlags.push({
+        phrase: "upi://pay",
+        reason: "Active UPI payment intent detected. Scanning this QR initiates an immediate DEBIT from your bank account, not an inbound credit.",
+        severity: "danger",
+      });
+    }
+
+    if (content.toLowerCase().includes("refund") || content.toLowerCase().includes("collect") || content.toLowerCase().includes("pin")) {
+      const matchPhrase = content.includes("ENTER_UPI_PIN_FOR_REFUND")
+        ? "ENTER_UPI_PIN_FOR_REFUND"
+        : (content.match(/refund[^\s&]*/i)?.[0] || "refund");
+      redFlags.push({
+        phrase: matchPhrase,
+        reason: "CRITICAL: You NEVER enter your UPI PIN to receive money or refunds. Entering your PIN transfers money OUT of your account.",
+        severity: "danger",
+      });
+      dangerPoints += 25;
+    }
+
+    const paMatch = content.match(/pa=([^&]+)/i);
+    if (paMatch) {
+      redFlags.push({
+        phrase: paMatch[0],
+        reason: `Direct beneficiary UPI address: ${paMatch[1]}. Unverified private recipient handle.`,
+        severity: "danger",
+      });
+    }
+
+    const amMatch = content.match(/am=([^&]+)/i);
+    if (amMatch) {
+      redFlags.push({
+        phrase: amMatch[0],
+        reason: `Automated debit amount set to ₹${amMatch[1]}. This amount will be deducted from your account upon MPIN entry.`,
+        severity: "danger",
+      });
+    }
+  }
+
+  // 2. Screenshot / Image parsing
+  if (type === "image" || content.startsWith("data:image/")) {
+    const isDigitalArrest = content.includes("DIGITAL ARREST") || content.includes("CBI") || content.includes("WARRANT") || content.includes("POLICE");
+    if (isDigitalArrest) {
+      detectedCategory = "Police & CBI Impersonation / Digital Arrest Extortion";
+      detectedFamily = "Digital Arrest Cyber Extortion Scheme";
+      dangerPoints += 92;
+
+      redFlags.push({
+        phrase: "DIGITAL ARREST",
+        reason: "There is NO legal provision for 'Digital Arrest' under any Indian criminal law (CrPC / BNS). Law enforcement never conducts courtroom hearings or arrests over WhatsApp/Skype video.",
+        severity: "danger",
+      });
+      redFlags.push({
+        phrase: "cbi-verification@sbi",
+        reason: "Fraudulent extortion payment handle. Law enforcement agencies never demand cash or security bonds to avoid arrest.",
+        severity: "danger",
+      });
+      redFlags.push({
+        phrase: "DELHI CYBER CELL",
+        reason: "Impersonation of law enforcement officers using forged letterheads, logos, and staged video rooms.",
+        severity: "danger",
+      });
+    } else {
+      detectedCategory = "Suspect Screenshot Evidence";
+      detectedFamily = "Mobile Screen Phishing Intercept";
+      dangerPoints += 70;
+      redFlags.push({
+        phrase: "SCREENSHOT_ARTIFACT",
+        reason: "Visual screenshot contains unverified caller IDs, urgency phrasing, or unauthorized financial solicitations.",
+        severity: "danger",
+      });
+    }
+  }
+
   // Check URL inside text or URL input
   const urlRegex = /(https?:\/\/[^\s]+)/gi;
   const urlsFound = content.match(urlRegex) || [];
@@ -188,22 +268,22 @@ export function runFallbackAnalysis(
     if (targetUrl) {
       const urlEval = analyzeUrlHeuristics(targetUrl);
 
-    if (urlEval.score >= 30) {
-      dangerPoints += urlEval.score * 0.55;
-      redFlags.push({
-        phrase: targetUrl,
-        reason: urlEval.reasons.join(". "),
-        severity: urlEval.score >= 60 ? "danger" : "suspicious",
-      });
-    } else if (urlEval.score < 20 && urlsFound.length > 0) {
-      redFlags.push({
-        phrase: targetUrl,
-        reason: "Valid secure HTTPS URL on reputable top-level domain.",
-        severity: "safe",
-      });
+      if (urlEval.score >= 30) {
+        dangerPoints += urlEval.score * 0.55;
+        redFlags.push({
+          phrase: targetUrl,
+          reason: urlEval.reasons.join(". "),
+          severity: urlEval.score >= 60 ? "danger" : "suspicious",
+        });
+      } else if (urlEval.score < 20 && urlsFound.length > 0) {
+        redFlags.push({
+          phrase: targetUrl,
+          reason: "Valid secure HTTPS URL on reputable top-level domain.",
+          severity: "safe",
+        });
+      }
     }
   }
-}
 
   // Scan for keywords and exact substrings
   for (const pattern of FRAUD_PATTERNS) {

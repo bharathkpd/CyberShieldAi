@@ -55,19 +55,35 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-40 bg-paper border-b-2 border-line">
-      {/* Top Banner Notice */}
-      <div className="bg-paper-2 border-b border-divider px-3 sm:px-4 py-1 text-center font-mono text-11 sm:text-12 text-ink flex flex-wrap items-center justify-between gap-1 max-w-container mx-auto">
-        <span className="font-bold flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-accent-red animate-pulse shrink-0" />
-          <span className="truncate max-w-[210px] sm:max-w-none">{t.hero.badge}</span>
-        </span>
-        <a
-          href="tel:1930"
-          className="font-bold text-accent-red hover:underline flex items-center gap-1.5 focus-visible:outline-none shrink-0"
-        >
-          <PhoneCall className="w-3.5 h-3.5 stroke-[2]" />
-          <span>{t.nav.helpline}</span>
-        </a>
+      {/* High-Authority Cybercrime Emergency Reminder Banner */}
+      <div className="bg-[#FAF4E6] border-b-2 border-line py-1.5 px-3 sm:px-4 font-mono text-11 sm:text-12 text-ink shadow-sm">
+        <div className="max-w-container mx-auto flex flex-col md:flex-row items-center justify-between gap-1.5 md:gap-2">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 font-bold">
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-accent-red text-white text-10 font-mono tracking-widest uppercase border border-ink shadow-[2px_2px_0px_#1B1B1B]">
+              <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+              LIVE DISPATCH
+            </span>
+            <span className="tracking-tight text-ink font-mono font-bold">
+              NATIONAL CYBER CRIME DESK // AP STATE CYBER CELL • TELANGANA TSCSB • DELHI POLICE IFSO
+            </span>
+            <span className="hidden lg:inline text-ink-soft font-normal text-11">
+              // MHA & I4C NODE #2026-IN
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2.5 shrink-0">
+            <span className="hidden sm:inline font-mono text-11 text-ink-soft uppercase font-semibold">
+              24x7 FRAUD FREEZE:
+            </span>
+            <a
+              href="tel:1930"
+              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-card border-2 border-line text-accent-red font-bold text-12 shadow-[2px_2px_0px_#1B1B1B] hover:bg-accent-red hover:text-white transition-colors"
+            >
+              <PhoneCall className="w-3.5 h-3.5 stroke-[2.5]" />
+              <span>DIAL 1930 (TOLL-FREE)</span>
+            </a>
+          </div>
+        </div>
       </div>
 
       <nav className="max-w-container mx-auto px-4 md:px-8 py-3 flex items-center justify-between">

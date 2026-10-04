@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { ScanInputType, LanguageCode, AnalysisResult } from "@/types";
 import { translations } from "@/lib/i18n";
-import { SAMPLE_SCAMS, SampleCase } from "@/lib/sampleScams";
+import { SAMPLE_SCAMS, SampleCase, SAMPLE_QR_DATA_URL, SAMPLE_SCREENSHOT_DATA_URL } from "@/lib/sampleScams";
 import { useToast } from "./Toast";
 
 interface ScannerProps {
@@ -155,11 +155,16 @@ export const Scanner: React.FC<ScannerProps> = ({
   };
 
   const loadSample = (sample: SampleCase) => {
+    setActiveTab(sample.type);
     if (sample.type === "url") {
-      setActiveTab("url");
       setUrlContent(sample.content);
+    } else if (sample.type === "image") {
+      setImagePreview(sample.content);
+      setTextContent("WHATSAPP / SKYPE FORENSIC INTERCEPT // SENDER: +91-8800991122\n[CBI & DELHI CYBER CELL DIGITAL ARREST NOTICE]\nCounterfeit passport seized at Delhi Airport. Digital Arrest Warrant #CBI-NDPS-88412 issued. Demands Rs 2,50,000 security bond to cbi-verification@sbi to prevent police dispatch.");
+    } else if (sample.type === "qr") {
+      setImagePreview(SAMPLE_QR_DATA_URL);
+      setQrDecodedText(sample.content);
     } else {
-      setActiveTab("text");
       setTextContent(sample.content);
     }
 
@@ -253,6 +258,39 @@ export const Scanner: React.FC<ScannerProps> = ({
                 className="w-full px-4 py-3 font-mono text-14 text-ink bg-transparent focus-visible:outline-none"
               />
             </div>
+            <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-11">
+              <span className="text-ink-soft font-bold">QUICK TEST:</span>
+              <button
+                type="button"
+                onClick={() => {
+                  setUrlContent("http://sbi-pan-kyc.top/update");
+                  onAnalyze("url", "http://sbi-pan-kyc.top/update");
+                }}
+                className="px-2 py-1 bg-paper-2 hover:bg-card border border-line text-accent-red font-bold cursor-pointer"
+              >
+                ⚡ SBI Phishing (.top)
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setUrlContent("https://indlapost-track.xyz/pay");
+                  onAnalyze("url", "https://indlapost-track.xyz/pay");
+                }}
+                className="px-2 py-1 bg-paper-2 hover:bg-card border border-line text-accent-red font-bold cursor-pointer"
+              >
+                ⚡ IndiaPost Delay Trap (.xyz)
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setUrlContent("https://www.apspdcl.in/quick-pay");
+                  onAnalyze("url", "https://www.apspdcl.in/quick-pay");
+                }}
+                className="px-2 py-1 bg-paper-2 hover:bg-card border border-line text-accent-green font-bold cursor-pointer"
+              >
+                ✓ Genuine AP Power (.in)
+              </button>
+            </div>
             <p className="font-sans text-12 text-ink-soft">
               Tests domain typosquatting, brand spoofing (SBI, Amazon, IndiaPost), disposable TLDs (.xyz, .top, .live), and credential-harvesting parameters.
             </p>
@@ -294,6 +332,24 @@ export const Scanner: React.FC<ScannerProps> = ({
                 <p className="font-mono text-12 text-ink-soft">
                   PNG, JPG, WEBP (Max 5MB)
                 </p>
+                <div className="mt-4 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (activeTab === "qr") {
+                        const qrSample = SAMPLE_SCAMS.find((s) => s.type === "qr")!;
+                        loadSample(qrSample);
+                      } else {
+                        const imgSample = SAMPLE_SCAMS.find((s) => s.type === "image")!;
+                        loadSample(imgSample);
+                      }
+                    }}
+                    className="btn-case text-12 py-1.5 px-3 bg-card border-2 border-line shadow-hard-sm hover:bg-paper font-bold text-accent-red cursor-pointer"
+                  >
+                    ⚡ {activeTab === "qr" ? "Load Sample Deceptive UPI QR Code" : "Load Sample Digital Arrest Screenshot"}
+                  </button>
+                </div>
               </div>
             ) : (
               <div className="p-4 border-2 border-line bg-paper-2 relative">
@@ -375,19 +431,29 @@ export const Scanner: React.FC<ScannerProps> = ({
         <div className="grid grid-cols-1 xs:grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-2.5">
           {SAMPLE_SCAMS.map((sample) => {
             const isDanger = sample.expectedVerdict === "DANGEROUS";
+            const isCurrentTab = sample.type === activeTab;
             return (
               <button
                 key={sample.id}
                 onClick={() => loadSample(sample)}
                 disabled={isLoading}
-                className="btn-case text-11 sm:text-12 py-2 px-2.5 sm:px-3 bg-paper-2 hover:bg-card flex items-center justify-start gap-2 text-ink text-left w-full sm:w-auto"
+                className={`btn-case text-11 sm:text-12 py-2 px-2.5 sm:px-3 flex items-center justify-between sm:justify-start gap-2 text-ink text-left w-full sm:w-auto transition-all cursor-pointer ${
+                  isCurrentTab
+                    ? "bg-card border-accent-red font-bold ring-2 ring-accent-red/20 shadow-hard"
+                    : "bg-paper-2 hover:bg-card"
+                }`}
               >
-                <span
-                  className={`w-2 h-2 shrink-0 ${
-                    isDanger ? "bg-accent-red" : "bg-accent-green"
-                  }`}
-                />
-                <span className="font-bold truncate">{sample.title}</span>
+                <div className="flex items-center gap-2 truncate">
+                  <span
+                    className={`w-2 h-2 shrink-0 ${
+                      isDanger ? "bg-accent-red" : "bg-accent-green"
+                    }`}
+                  />
+                  <span className="font-bold truncate">{sample.title}</span>
+                </div>
+                <span className="font-mono text-10 font-bold px-1.5 py-0.5 border border-line bg-paper text-ink-soft uppercase shrink-0">
+                  {sample.type === "image" ? "IMG" : sample.type}
+                </span>
               </button>
             );
           })}
