@@ -389,6 +389,60 @@
       width: 0%;
       transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
     }
+
+    /* Mobile Responsive Enhancements */
+    @media (max-width: 640px) {
+      .container {
+        padding: 0 12px !important;
+      }
+      .hero-grid {
+        padding: 24px 0 32px 0 !important;
+        gap: 24px !important;
+      }
+      .hero-actions {
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+      .hero-actions .btn-case {
+        width: 100% !important;
+        text-align: center !important;
+      }
+      .hero-evidence-card {
+        transform: rotate(0deg) !important;
+        padding: 16px !important;
+        margin: 0 auto;
+      }
+      .case-card {
+        box-shadow: 4px 4px 0px var(--line) !important;
+      }
+      .tab-btn {
+        padding: 10px 4px !important;
+        font-size: 11px !important;
+      }
+      .btn-run-full {
+        width: 100% !important;
+      }
+      .report-actions {
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+      .report-action-group {
+        flex-direction: column !important;
+        width: 100% !important;
+      }
+      .report-actions .btn-case,
+      .report-action-group .btn-case {
+        width: 100% !important;
+      }
+      .modal-card {
+        padding: 16px !important;
+        margin: 8px !important;
+        max-width: 95vw !important;
+      }
+      .trust-strip-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -444,7 +498,7 @@
           Paste suspicious SMS, WhatsApp offers, delivery links, or UPI payment requests. Get instant forensic verdict, exact highlighted red flags, and 1-tap warning cards for your parents.
         </p>
 
-        <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-bottom: 28px;">
+        <div class="hero-actions" style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-bottom: 28px;">
           <a href="#intake" class="btn-case btn-case-primary" style="font-size: 16px; padding: 12px 24px;">
             Start Investigation ↘
           </a>
@@ -460,8 +514,8 @@
       </div>
 
       <!-- Right Column: Tilted Hero Evidence Card -->
-      <div style="display: flex; justify-content: center;">
-        <div class="case-card tape-top-left tape-top-right" style="padding: 24px; max-width: 440px; width: 100%; transform: rotate(-2deg); background: var(--card); position: relative;">
+      <div style="display: flex; justify-content: center; width: 100%;">
+        <div class="case-card tape-top-left tape-top-right hero-evidence-card" style="padding: 24px; max-width: 440px; width: 100%; transform: rotate(-2deg); background: var(--card); position: relative;">
           <div style="display: flex; justify-content: space-between; border-bottom: 2px solid var(--line); padding-bottom: 8px; margin-bottom: 14px; font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700;">
             <span style="background: var(--accent-red); color: white; padding: 2px 6px;">CASE #CS-2041</span>
             <span style="color: var(--ink-soft);">EXHIBIT A // SMS INTERCEPT</span>
@@ -490,7 +544,7 @@
     </div>
 
     <!-- Trust Strip -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 36px;">
+    <div class="trust-strip-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 36px;">
       <div style="border: 2px solid var(--line); background: var(--card); padding: 16px; box-shadow: 3px 3px 0px var(--line);">
         <div style="font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700; color: var(--ink-soft);">01 // ATTACK FAMILIES</div>
         <div style="font-family: 'IBM Plex Mono'; font-size: 16px; font-weight: 700; margin-top: 4px;">Fake KYC, Job Fees, Lottery & UPI</div>
@@ -542,7 +596,7 @@
 
       <!-- Action Button & Counter -->
       <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: 18px; gap: 12px;">
-        <button id="btn-run-analysis" onclick="runAnalysis()" class="btn-case btn-case-primary" style="font-size: 16px; padding: 12px 28px;">
+        <button id="btn-run-analysis" onclick="runAnalysis()" class="btn-case btn-case-primary btn-run-full" style="font-size: 16px; padding: 12px 28px;">
           Analyze with CyberShield AI ↘
         </button>
         <span style="font-family: 'IBM Plex Mono'; font-size: 12px; color: var(--ink-soft);">
@@ -668,8 +722,8 @@
       </div>
 
       <!-- Action Bar -->
-      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; border-top: 2px solid var(--line); padding-top: 20px; gap: 12px;">
-        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+      <div class="report-actions" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; border-top: 2px solid var(--line); padding-top: 20px; gap: 12px;">
+        <div class="report-action-group" style="display: flex; flex-wrap: wrap; gap: 10px;">
           <button onclick="openFamilyModal()" class="btn-case" style="background: var(--paper-2);">
             👨‍👩‍👧 Forward Warning to Family
           </button>
@@ -686,7 +740,7 @@
 
   <!-- Family Warning Card Modal -->
   <div id="family-modal" class="modal-overlay">
-    <div class="case-card" style="padding: 24px; max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto;">
+    <div class="case-card modal-card" style="padding: 24px; max-width: 520px; width: 100%; max-height: 90vh; overflow-y: auto;">
       <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--line); padding-bottom: 8px; margin-bottom: 16px;">
         <h3 class="font-serif" style="font-size: 20px; font-weight: 800;">Family Protect Warning Card</h3>
         <button onclick="closeFamilyModal()" style="border: 2px solid var(--line); background: var(--card); font-family: 'IBM Plex Mono'; font-weight: 700; padding: 2px 8px; cursor: pointer;">✕</button>
@@ -727,7 +781,7 @@
 
   <!-- Complaint Helper Modal -->
   <div id="complaint-modal" class="modal-overlay">
-    <div class="case-card" style="padding: 24px; max-width: 640px; width: 100%; max-height: 90vh; overflow-y: auto;">
+    <div class="case-card modal-card" style="padding: 24px; max-width: 640px; width: 100%; max-height: 90vh; overflow-y: auto;">
       <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--line); padding-bottom: 8px; margin-bottom: 16px;">
         <div>
           <span style="font-family: 'IBM Plex Mono'; font-size: 11px; font-weight: 700; color: var(--accent-red);">1930 & I4C COMPLIANT DRAFT</span>
