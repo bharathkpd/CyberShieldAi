@@ -41,6 +41,7 @@ export const Scanner: React.FC<ScannerProps> = ({
   const [urlContent, setUrlContent] = useState("");
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [qrDecodedText, setQrDecodedText] = useState<string | null>(null);
+  const [qrManualString, setQrManualString] = useState("");
   const [isDragging, setIsDragging] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -88,11 +89,11 @@ export const Scanner: React.FC<ScannerProps> = ({
       }
       await onAnalyze("image", imagePreview);
     } else if (activeTab === "qr") {
-      if (!qrDecodedText && !imagePreview) {
-        toastError("No QR Code", "Please upload a QR code image to decode and analyze.");
+      const targetContent = qrDecodedText || qrManualString.trim() || imagePreview || "";
+      if (!targetContent) {
+        toastError("No QR Code or UPI String", "Please upload a QR code image or enter a UPI payment string.");
         return;
       }
-      const targetContent = qrDecodedText || imagePreview || "";
       await onAnalyze("qr", targetContent);
     }
   };
@@ -350,6 +351,29 @@ export const Scanner: React.FC<ScannerProps> = ({
                     ⚡ {activeTab === "qr" ? "Load Sample Deceptive UPI QR Code" : "Load Sample Digital Arrest Screenshot"}
                   </button>
                 </div>
+
+                {activeTab === "qr" && (
+                  <div
+                    onClick={(e) => e.stopPropagation()}
+                    className="mt-4 pt-3 border-t border-divider text-left max-w-md mx-auto"
+                  >
+                    <label className="block font-mono text-11 font-bold text-ink-soft mb-1 uppercase">
+                      Or Paste Raw UPI Payment String:
+                    </label>
+                    <div className="flex border-2 border-line bg-card">
+                      <span className="px-2.5 py-1.5 bg-paper-2 border-r-2 border-line font-mono text-11 font-bold text-ink-soft flex items-center">
+                        UPI://
+                      </span>
+                      <input
+                        type="text"
+                        value={qrManualString}
+                        onChange={(e) => setQrManualString(e.target.value)}
+                        placeholder="pay?pa=scammer@oksbi&am=5000&tn=Refund..."
+                        className="w-full px-2.5 py-1.5 font-mono text-12 text-ink bg-transparent focus-visible:outline-none"
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="p-4 border-2 border-line bg-paper-2 relative">
