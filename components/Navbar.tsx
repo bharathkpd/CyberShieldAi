@@ -59,7 +59,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="bg-[#FAF4E6] border-b-2 border-line py-1.5 px-3 sm:px-4 font-mono text-11 sm:text-12 text-ink shadow-sm">
         <div className="max-w-container mx-auto flex flex-col md:flex-row items-center justify-between gap-1.5 md:gap-2">
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 font-bold">
-            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-accent-red text-white text-10 font-mono tracking-widest uppercase border border-ink shadow-[2px_2px_0px_#1B1B1B]">
+            <span className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 bg-accent-red text-white text-10 font-mono tracking-widest uppercase border border-ink shadow-[2px_2px_0px_#1B1B1B]">
               <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
               LIVE DISPATCH
             </span>
