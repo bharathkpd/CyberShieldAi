@@ -18,7 +18,7 @@ function checkRateLimit(ip: string): boolean {
     return true;
   }
 
-  if (record.count >= 15) {
+  if (record.count >= 100) {
     return false;
   }
 
